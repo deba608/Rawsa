@@ -45,16 +45,4 @@ npm run build
 npm run start
 ```
 
-## Assets
 
-The production product images live in:
-
-```text
-public/rawsa-designs/cropped
-```
-
-These PNGs were cropped to remove transparent margins while preserving the original product designs.
-
-## Notes
-
-The website avoids unsupported medical or blood-sugar claims. Product messaging focuses on the packaging claims and brand positioning: higher pulp feel, no added colour, no added sugar, no artificial sweetener, lower-calorie direction, and herbal inspiration.
