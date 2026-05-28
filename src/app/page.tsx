@@ -1,65 +1,786 @@
+"use client";
+
 import Image from "next/image";
+import type { CSSProperties, FormEvent } from "react";
+import { useState, useEffect } from "react";
+
+type Product = {
+  id: string;
+  name: string;
+  shortName: string;
+  tagline: string;
+  front: string;
+  back: string;
+  accent: string;
+  soft: string;
+  fruit: string;
+  notes: string[];
+};
+
+const products: Product[] = [
+  {
+    id: "mango",
+    name: "Mango",
+    shortName: "Mango",
+    tagline: "Golden, pulpy and sun-rich",
+    front: "/rawsa-designs/cropped/Mango.png",
+    back: "/rawsa-designs/cropped/MangoBack.png",
+    accent: "#f59e0b",
+    soft: "#fff4c8",
+    fruit: "Alphonso-style fruit richness",
+    notes: ["Higher pulp feel", "No added sugar", "No added colour"],
+  },
+  {
+    id: "orange",
+    name: "Orange",
+    shortName: "Orange",
+    tagline: "Bright citrus with clean refreshment",
+    front: "/rawsa-designs/cropped/Orange.png",
+    back: "/rawsa-designs/cropped/OrangeBack.png",
+    accent: "#f97316",
+    soft: "#ffedd5",
+    fruit: "Juicy citrus brightness",
+    notes: ["Zesty flavour", "Light refreshment", "Fruit-forward taste"],
+  },
+  {
+    id: "pink-guava",
+    name: "Pink Guava",
+    shortName: "Guava",
+    tagline: "Tropical, floral and smooth",
+    front: "/rawsa-designs/cropped/PinkGuava.png",
+    back: "/rawsa-designs/cropped/PinkGuavaBack.png",
+    accent: "#ec4899",
+    soft: "#fce7f3",
+    fruit: "Pink guava pulp character",
+    notes: ["Tropical aroma", "Smooth mouthfeel", "Modern fruit drink"],
+  },
+  {
+    id: "sweet-tamarinda",
+    name: "Sweet Tamarinda",
+    shortName: "Tamarinda",
+    tagline: "Indian tang with a sweet finish",
+    front: "/rawsa-designs/cropped/SweetTamarinda.png",
+    back: "/rawsa-designs/cropped/SweetTamarindaBack.png",
+    accent: "#b45309",
+    soft: "#fef3c7",
+    fruit: "Heritage tamarind flavour",
+    notes: ["Tangy profile", "Indian taste memory", "Balanced finish"],
+  },
+  {
+    id: "appyrush",
+    name: "AppyRush",
+    shortName: "AppyRush",
+    tagline: "Crisp apple energy",
+    front: "/rawsa-designs/cropped/AppyRush.png",
+    back: "/rawsa-designs/cropped/AppyRush%20Back.png",
+    accent: "#dc2626",
+    soft: "#fee2e2",
+    fruit: "Apple-led refreshment",
+    notes: ["Crisp taste", "Lively sip", "Shelf-ready design"],
+  },
+];
+
+const ingredientCards = [
+  {
+    label: "Fruit Pulp",
+    title: "More body in every sip",
+    copy: "Rawsa is built around a fuller fruit experience, giving each flavour a richer, more satisfying mouthfeel.",
+  },
+  {
+    label: "Herbal Touch",
+    title: "Botanical inspiration",
+    copy: "Ashwagandha, brahmi and Indian herbal ideas guide the wellness tone without turning the drink into medicine.",
+  },
+  {
+    label: "Modern Choice",
+    title: "Refreshment with restraint",
+    copy: "No added colour and no artificial sweetener messaging stays close to the packaging and keeps the promise clear.",
+  },
+];
+
+type CmpVal = true | false | "partial";
+
+const compareFeatures = [
+  "Higher Pulp Feel",
+  "No Added Sugar",
+  "No Added Colour",
+  "No Artificial Sweetener",
+  "Herbal Inspiration",
+  "Lower Calorie Direction",
+  "Real Fruit Character",
+];
+
+const compareDrinks: { name: string; highlight: boolean; values: CmpVal[] }[] = [
+  {
+    name: "Rawsa",
+    highlight: true,
+    values: [true, true, true, true, true, true, true],
+  },
+  {
+    name: "Regular Juice",
+    highlight: false,
+    values: ["partial", false, false, false, false, false, "partial"],
+  },
+  {
+    name: "Energy Drinks",
+    highlight: false,
+    values: [false, false, false, "partial", false, "partial", false],
+  },
+  {
+    name: "Carbonated Soda",
+    highlight: false,
+    values: [false, false, false, false, false, false, false],
+  },
+];
+
+const whyItems = [
+  {
+    title: "Higher Pulp Feel",
+    copy: "Fuller fruit texture and a richer sip experience than ordinary thin refreshers.",
+    icon: "drop",
+  },
+  {
+    title: "No Added Sugar",
+    copy: "A front-label promise that makes the range feel lighter, clearer and easier to trust.",
+    icon: "leaf",
+  },
+  {
+    title: "No Added Colour",
+    copy: "A clean, direct packaging promise that helps Rawsa feel honest on the shelf.",
+    icon: "eye",
+  },
+  {
+    title: "No Artificial Sweetener",
+    copy: "Sweetness positioning stays clear, modern and aligned with the bottle design.",
+    icon: "shield",
+  },
+  {
+    title: "Lower-Calorie Direction",
+    copy: "A lighter refreshment idea for everyday moments and wellness-aware consumers.",
+    icon: "spark",
+  },
+  {
+    title: "Herbal Inspiration",
+    copy: "Ashwagandha, brahmi and botanical thinking add a differentiated Indian wellness layer.",
+    icon: "herb",
+  },
+];
+
+function WhyIcon({ name }: { name: string }) {
+  return (
+    <span className="why-icon" aria-hidden="true">
+      {name === "drop" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+        </svg>
+      )}
+      {name === "leaf" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z" />
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+        </svg>
+      )}
+      {name === "eye" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      )}
+      {name === "shield" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      )}
+      {name === "spark" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      )}
+      {name === "herb" && (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22V12" />
+          <path d="M12 12C12 6 17 4 17 4s1 6-5 8z" />
+          <path d="M12 12C12 6 7 4 7 4s-1 6 5 8z" />
+        </svg>
+      )}
+    </span>
+  );
+}
+
+function CmpCell({ value }: { value: CmpVal }) {
+  if (value === true) {
+    return (
+      <span className="cmp-yes" aria-label="Yes">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </span>
+    );
+  }
+  if (value === "partial") {
+    return (
+      <span className="cmp-partial" aria-label="Partial">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12" />
+        </svg>
+      </span>
+    );
+  }
+  return (
+    <span className="cmp-no" aria-label="No">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </span>
+  );
+}
+
+const navLinks = [
+  { href: "#flavours", label: "Flavours", id: "flavours" },
+  { href: "#why", label: "Why Rawsa", id: "why" },
+  { href: "#compare", label: "Compare", id: "compare" },
+  { href: "#ingredients", label: "Ingredients", id: "ingredients" },
+  { href: "#distributor", label: "Distributor", id: "distributor" },
+];
 
 export default function Home() {
+  const [activeProduct, setActiveProduct] = useState(products[0]);
+  const [flipped, setFlipped] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState("hero");
+
+  const handleProduct = (product: Product) => {
+    setActiveProduct(product);
+    setFlipped(false);
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitted(true);
+  };
+
+  // Active section tracking
+  useEffect(() => {
+    const sectionIds = ["hero", "flavours", "why", "compare", "ingredients", "story", "distributor"];
+    const observers = sectionIds.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveNav(id); },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
+
+  // Scroll reveal
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).style.animationPlayState = "running";
+            e.target.classList.add("is-visible");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 1040) setMobileMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="site-shell">
+      {/* Mobile overlay */}
+      <div
+        className={`mobile-overlay${mobileMenuOpen ? " is-open" : ""}`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Mobile drawer */}
+      <nav
+        className={`mobile-drawer${mobileMenuOpen ? " is-open" : ""}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="drawer-head">
+          <span className="logo-plate">
+            <Image src="/rawsa-designs/cropped/RAWSA_logo.png" alt="Rawsa" width={110} height={33} />
+          </span>
+          <button
+            className="drawer-close"
+            type="button"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div className="drawer-links">
+          {navLinks.map(({ href, label, id }) => (
+            <a
+              key={id}
+              href={href}
+              className={activeNav === id ? "is-active" : ""}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+        <a className="primary-button drawer-cta" href="#distributor" onClick={() => setMobileMenuOpen(false)}>
+          Distributor Enquiry
+        </a>
+      </nav>
+
+      {/* Top navigation */}
+      <nav className="topbar" aria-label="Primary navigation">
+        <a className="brand-mark" href="#hero" aria-label="Rawsa home">
+          <Image
+            src="/rawsa-designs/cropped/RAWSA_logo.png"
+            alt="Rawsa"
+            width={140}
+            height={42}
+            priority
+            className="logo-dark"
+          />
+          <span className="brand-company">by Stoneman Foodtech</span>
+        </a>
+        <div className="nav-links" role="list">
+          {navLinks.map(({ href, label, id }) => (
+            <a
+              key={id}
+              href={href}
+              role="listitem"
+              className={activeNav === id ? "is-active" : ""}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+        <div className="nav-right">
+          <a className="nav-cta" href="#distributor">
+            Distributor Enquiry
+          </a>
+          <button
+            className="hamburger"
+            type="button"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-drawer"
+          >
+            <span className={`ham-line${mobileMenuOpen ? " top-open" : ""}`} />
+            <span className={`ham-line${mobileMenuOpen ? " mid-open" : ""}`} />
+            <span className={`ham-line${mobileMenuOpen ? " bot-open" : ""}`} />
+          </button>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <section id="hero" className="hero-section">
+        <div className="hero-copy">
+          <p className="eyebrow">Stoneman Foodtech presents</p>
+          <h1>
+            <span>Real</span>
+            <span>fruit.</span>
+            <span>Herbal</span>
+            <span>refreshment</span>
+            <span>Rawsa.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <div className="mobile-product-strip" aria-label="Rawsa featured products">
+            {products.slice(0, 3).map((product) => (
+              <Image
+                key={product.id}
+                src={product.front}
+                alt={`Rawsa ${product.name}`}
+                width={150}
+                height={422}
+                priority
+              />
+            ))}
+          </div>
+          <p className="hero-text">
+            A colourful fruit drink collection crafted for higher pulp feel,
+            clean label appeal and a modern Indian refreshment ritual.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-button" href="#flavours">
+              Explore Flavours
+            </a>
+            <a className="secondary-button" href="#distributor">
+              Become a Distributor
+            </a>
+          </div>
+          <div className="claim-row" aria-label="Rawsa product highlights">
+            <span>Higher pulp feel</span>
+            <span>No added colour</span>
+            <span>No added sugar</span>
+            <span>No artificial sweetener</span>
+          </div>
+          <div className="hero-stats" aria-label="Rawsa at a glance">
+            <div className="stat-item">
+              <strong>5</strong>
+              <span>Flavours</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat-item">
+              <strong>0</strong>
+              <span>Artificial Sweeteners</span>
+            </div>
+            <div className="stat-divider" />
+            <div className="stat-item">
+              <strong>100%</strong>
+              <span>Fruit-led</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-stage" aria-label="Rawsa product range">
+          <div className="hero-burst hero-burst-one" />
+          <div className="hero-burst hero-burst-two" />
+          <div className="product-lineup">
+            {products.map((product, index) => (
+              <button
+                key={product.id}
+                type="button"
+                className={`hero-bottle hero-bottle-${index}`}
+                onClick={() => handleProduct(product)}
+                aria-label={`Show ${product.name}`}
+              >
+                <Image
+                  src={product.front}
+                  alt={`Rawsa ${product.name} bottle`}
+                  width={380}
+                  height={1071}
+                  priority={index < 3}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Flavours */}
+      <section id="flavours" className="section flavour-section">
+        <div className="section-heading reveal">
+          <p className="eyebrow">The Rawsa range</p>
+          <h2>Five shelf-ready flavours, one fresh family.</h2>
+          <p>
+            Tap a flavour, then tap the bottle to see front and back packaging
+            without losing the clean product focus.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="flavour-grid reveal">
+          <div
+            className="flavour-panel"
+            style={{ "--accent": activeProduct.accent, "--soft": activeProduct.soft } as CSSProperties}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="flavour-copy">
+              <p className="product-kicker">{activeProduct.fruit}</p>
+              <h3>{activeProduct.name}</h3>
+              <p>{activeProduct.tagline}</p>
+              <div className="note-list">
+                {activeProduct.notes.map((note) => (
+                  <span key={note}>{note}</span>
+                ))}
+              </div>
+              <p className="flip-hint">Tap bottle to flip</p>
+            </div>
+
+            <button
+              type="button"
+              className={`flip-product ${flipped ? "is-flipped" : ""}`}
+              onClick={() => setFlipped((value) => !value)}
+              aria-label={`Flip ${activeProduct.name} bottle to see ${flipped ? "front" : "back"}`}
+            >
+              <span className="flip-face flip-front">
+                <Image
+                  src={activeProduct.front}
+                  alt={`Rawsa ${activeProduct.name} front label`}
+                  width={420}
+                  height={1181}
+                />
+              </span>
+              <span className="flip-face flip-back">
+                <Image
+                  src={activeProduct.back}
+                  alt={`Rawsa ${activeProduct.name} back label`}
+                  width={420}
+                  height={1181}
+                />
+              </span>
+            </button>
+          </div>
+
+          <div className="flavour-selector" aria-label="Choose a flavour">
+            {products.map((product) => (
+              <button
+                key={product.id}
+                type="button"
+                className={product.id === activeProduct.id ? "is-active" : ""}
+                onClick={() => handleProduct(product)}
+                style={{ "--accent": product.accent, "--soft": product.soft } as CSSProperties}
+                aria-pressed={product.id === activeProduct.id}
+              >
+                <span className="selector-thumb">
+                  <Image
+                    src={product.front}
+                    alt=""
+                    width={76}
+                    height={214}
+                  />
+                </span>
+                <span>
+                  <strong>{product.name}</strong>
+                  <small>{product.tagline}</small>
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Why Rawsa */}
+      <section id="why" className="section why-section">
+        <div className="section-heading align-left reveal">
+          <p className="eyebrow">Why Rawsa</p>
+          <h2>Built for people who want the drink to taste as good as it looks.</h2>
+        </div>
+        <div className="why-grid">
+          {whyItems.map(({ title, copy, icon }, i) => (
+            <article
+              key={title}
+              className="why-card reveal"
+              style={{ "--reveal-delay": `${i * 60}ms` } as CSSProperties}
+            >
+              <WhyIcon name={icon} />
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Compare Section — NEW */}
+      <section id="compare" className="section compare-section">
+        <div className="section-heading reveal">
+          <p className="eyebrow">How Rawsa compares</p>
+          <h2>A different kind of drink.</h2>
+          <p>
+            See how Rawsa stacks up against the alternatives on the shelf.
+          </p>
+        </div>
+
+        <div className="compare-wrap reveal">
+          <div className="compare-scroll">
+            <table className="compare-table" role="table">
+              <thead>
+                <tr>
+                  <th scope="col" className="feat-col">Feature</th>
+                  {compareDrinks.map((d) => (
+                    <th
+                      key={d.name}
+                      scope="col"
+                      className={`drink-col${d.highlight ? " is-rawsa" : ""}`}
+                    >
+                      {d.highlight ? (
+                        <span className="rawsa-col-head">
+                          <Image
+                            src="/rawsa-designs/cropped/RAWSA_logo.png"
+                            alt="Rawsa"
+                            width={86}
+                            height={26}
+                            className="logo-dark"
+                          />
+                          <span className="rawsa-badge">Our Pick</span>
+                        </span>
+                      ) : (
+                        d.name
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {compareFeatures.map((feat, fi) => (
+                  <tr key={feat}>
+                    <td className="feat-col">{feat}</td>
+                    {compareDrinks.map((d) => (
+                      <td
+                        key={d.name}
+                        className={`drink-col${d.highlight ? " is-rawsa" : ""}`}
+                      >
+                        <CmpCell value={d.values[fi]} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="compare-legend">
+            <span className="cmp-yes" aria-label="Yes">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <span>Present</span>
+            <span className="cmp-partial" aria-label="Partial">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </span>
+            <span>Varies by brand</span>
+            <span className="cmp-no" aria-label="No">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </span>
+            <span>Typically absent</span>
+          </div>
+          <p className="compare-note">Based on typical category formulations. Individual products may vary.</p>
+        </div>
+      </section>
+
+      {/* Ingredients */}
+      <section id="ingredients" className="section ingredients-section">
+        <div className="ingredient-visual reveal">
+          <Image
+            src={activeProduct.front}
+            alt={`Rawsa ${activeProduct.name} bottle`}
+            width={390}
+            height={1098}
+          />
+        </div>
+        <div className="ingredient-content reveal">
+          <p className="eyebrow">Ingredient story</p>
+          <h2>Fruit first, then a thoughtful herbal signature.</h2>
+          <p>
+            Rawsa should feel bright and familiar at first sip, then leave a
+            subtle botanical impression that makes it different from everyday
+            juice drinks.
+          </p>
+          <div className="ingredient-cards">
+            {ingredientCards.map((card) => (
+              <article key={card.label}>
+                <span>{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Story */}
+      <section id="story" className="section story-section">
+        <div className="story-card reveal">
+          <p className="eyebrow">Stoneman Foodtech</p>
+          <h2>A modern Indian foodtech brand starting with a drink people notice.</h2>
+          <p>
+            Rawsa brings together fruit-rich refreshment, Indian flavour memory,
+            herbal inspiration and packaging with real shelf presence. The
+            result is a product family that feels ready for cafes, retail
+            counters, supermarkets and distributor conversations.
+          </p>
+        </div>
+        <div className="story-products reveal">
+          {products.slice(0, 3).map((product) => (
+            <Image
+              key={product.id}
+              src={product.front}
+              alt={`Rawsa ${product.name}`}
+              width={260}
+              height={732}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Distributor */}
+      <section id="distributor" className="section distributor-section">
+        <div className="distributor-copy reveal">
+          <p className="eyebrow">Distributor enquiry</p>
+          <h2>Bring Rawsa to your market.</h2>
+          <p>
+            For retail, cafe, campus, hospitality and distribution enquiries,
+            share your details and the Stoneman Foodtech team can follow up.
+          </p>
+        </div>
+        <form className="enquiry-form reveal" onSubmit={handleSubmit} noValidate>
+          {submitted ? (
+            <div className="form-success">
+              <strong>Thank you.</strong>
+              <span>Your Rawsa distributor enquiry has been noted.</span>
+            </div>
+          ) : (
+            <>
+              <label>
+                Name
+                <input required name="name" placeholder="Your name" autoComplete="name" />
+              </label>
+              <label>
+                Business email
+                <input required type="email" name="email" placeholder="you@company.com" autoComplete="email" />
+              </label>
+              <label>
+                City / market
+                <input required name="city" placeholder="City, State" autoComplete="address-level2" />
+              </label>
+              <label>
+                Message
+                <textarea name="message" placeholder="Tell us about your channel or requirement" />
+              </label>
+              <button className="primary-button" type="submit">
+                Send Enquiry
+              </button>
+            </>
+          )}
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer-section">
+        <div className="footer-brand">
+          <span className="logo-plate">
+            <Image
+              src="/rawsa-designs/cropped/RAWSA_logo.png"
+              alt="Rawsa"
+              width={180}
+              height={54}
+            />
+          </span>
+          <p>Rawsa by Stoneman Foodtech. Fruit-rich refreshment with a modern Indian botanical spirit.</p>
+        </div>
+        <div className="footer-links">
+          <a href="#flavours">Flavours</a>
+          <a href="#why">Why Rawsa</a>
+          <a href="#compare">Compare</a>
+          <a href="#ingredients">Ingredients</a>
+          <a href="#distributor">Distributor Enquiry</a>
+        </div>
+        <p className="copyright">© {new Date().getFullYear()} Stoneman Foodtech. All rights reserved.</p>
+      </footer>
+    </main>
   );
 }

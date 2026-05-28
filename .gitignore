@@ -20,9 +20,14 @@
 # production
 /build
 
+# local generated artifacts
+/artifacts/
+/.claude/
+
 # misc
 .DS_Store
 *.pem
+Thumbs.db
 
 # debug
 npm-debug.log*
