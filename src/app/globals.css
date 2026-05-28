@@ -1248,11 +1248,11 @@ h3 {
 .footer-section {
   width: min(1180px, calc(100% - 40px));
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 28px;
-  align-items: center;
+  grid-template-columns: 1fr auto auto;
+  gap: 28px 40px;
+  align-items: start;
   margin: 0 auto 24px;
-  padding: 28px;
+  padding: 32px 28px 24px;
   border: 1px solid var(--line);
   border-radius: 28px;
   background: #24150f;
@@ -1274,9 +1274,8 @@ h3 {
 
 .footer-links {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 18px;
+  flex-direction: column;
+  gap: 10px;
   color: rgba(255, 250, 240, 0.8);
   font-size: 14px;
   font-weight: 800;
@@ -1288,6 +1287,35 @@ h3 {
 
 .footer-links a:hover {
   color: var(--mango);
+}
+
+.footer-address {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 250, 240, 0.7);
+}
+
+.footer-address strong {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 250, 240, 0.95);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.footer-address a {
+  color: var(--mango);
+  margin-top: 6px;
+  font-weight: 700;
+  transition: color 160ms ease;
+}
+
+.footer-address a:hover {
+  color: #fcd34d;
 }
 
 .copyright {
@@ -1546,22 +1574,14 @@ h3 {
     border-radius: 26px;
   }
 
-  .footer-section,
-  .footer-brand {
-    grid-template-columns: 1fr;
-  }
-
   .footer-section {
     width: calc(100% - 24px);
+    grid-template-columns: 1fr;
   }
 
   .footer-brand {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .footer-links {
-    justify-content: flex-start;
   }
 
   .compare-table th,

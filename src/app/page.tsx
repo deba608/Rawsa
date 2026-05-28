@@ -779,7 +779,14 @@ export default function Home() {
           <a href="#ingredients">Ingredients</a>
           <a href="#distributor">Distributor Enquiry</a>
         </div>
-        <p className="copyright">© {new Date().getFullYear()} Stoneman Foodtech. All rights reserved.</p>
+        <address className="footer-address">
+          <strong>Stoneman Food and Beverages Pvt Ltd</strong>
+          <span>Ground Floor, Plot No. 946/2999</span>
+          <span>Prasanti Vihar, Barmunda</span>
+          <span>Bhubaneswar – 751003, Odisha</span>
+          <a href="mailto:admin@stonemanfoodtech.com">admin@stonemanfoodtech.com</a>
+        </address>
+        <p className="copyright">© {new Date().getFullYear()} Stoneman Food and Beverages Pvt Ltd. All rights reserved.</p>
       </footer>
     </main>
   );
