@@ -1261,15 +1261,17 @@ h3 {
 
 .footer-brand {
   display: flex;
-  align-items: center;
-  gap: 18px;
+  flex-direction: column;
+  gap: 14px;
   min-width: 0;
 }
 
 .footer-brand p {
-  max-width: 520px;
+  max-width: 360px;
   margin: 0;
   color: rgba(255, 250, 240, 0.72);
+  font-size: 14px;
+  line-height: 1.65;
 }
 
 .footer-links {
@@ -1331,6 +1333,14 @@ h3 {
 
 .logo-dark {
   filter: brightness(0);
+}
+
+.footer-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+  opacity: 0.92;
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
@@ -1396,6 +1406,19 @@ h3 {
   .ingredient-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .distributor-section {
+    padding: 36px;
+    gap: 18px;
+  }
+
+  .hero-stage {
+    min-height: 460px;
+  }
+
+  .flip-product {
+    height: 560px;
+  }
 }
 
 /* ─── Mobile (≤720px) ────────────────────────────────────────── */
@@ -1452,10 +1475,15 @@ h3 {
   .hero-stats {
     gap: 0;
     padding: 12px 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
 
   .stat-item {
-    padding: 0 14px;
+    padding: 6px 14px;
+    flex: 1;
+    min-width: 80px;
   }
 
   .stat-item strong {
@@ -1548,11 +1576,11 @@ h3 {
   }
 
   .ingredient-visual {
-    min-height: 500px;
+    min-height: 380px;
   }
 
   .ingredient-visual img {
-    max-height: 480px;
+    max-height: 360px;
   }
 
   .story-products {
@@ -1577,11 +1605,11 @@ h3 {
   .footer-section {
     width: calc(100% - 24px);
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .footer-brand {
-    align-items: flex-start;
-    flex-direction: column;
+  .footer-logo {
+    width: 100px;
   }
 
   .compare-table th,
@@ -1592,5 +1620,73 @@ h3 {
 
   .feat-col {
     min-width: 150px;
+  }
+}
+
+/* ─── Extra-small phones (≤420px) ───────────────────────────── */
+
+@media (max-width: 420px) {
+  .topbar {
+    width: calc(100% - 16px);
+    min-height: 56px;
+    border-radius: 12px;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .brand-mark > img {
+    width: 78px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 10.5vw, 2.6rem);
+  }
+
+  h2 {
+    font-size: clamp(1.9rem, 10vw, 2.8rem);
+  }
+
+  .claim-row span,
+  .note-list span {
+    font-size: 11.5px;
+    padding: 0 10px;
+    min-height: 30px;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .stat-item {
+    padding: 4px 8px;
+  }
+
+  .stat-item strong {
+    font-size: 1.25rem;
+  }
+
+  .hero-stats {
+    padding: 10px 8px;
+  }
+
+  .hero-stage {
+    margin-top: -40px;
+  }
+
+  .section {
+    padding: 52px 0;
+  }
+
+  .section-heading {
+    margin-bottom: 32px;
+  }
+
+  .why-card {
+    padding: 22px;
+  }
+
+  .drawer-links a {
+    font-size: 14px;
+    padding: 11px 14px;
   }
 }

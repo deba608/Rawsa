@@ -319,9 +319,7 @@ export default function Home() {
         aria-hidden={!mobileMenuOpen}
       >
         <div className="drawer-head">
-          <span className="logo-plate">
-            <Image src="/rawsa-designs/cropped/RAWSA_logo.png" alt="Rawsa" width={110} height={33} />
-          </span>
+          <Image src="/rawsa-designs/cropped/RAWSA_logo.png" alt="Rawsa" width={100} height={30} className="logo-dark" />
           <button
             className="drawer-close"
             type="button"
@@ -762,14 +760,13 @@ export default function Home() {
       {/* Footer */}
       <footer className="footer-section">
         <div className="footer-brand">
-          <span className="logo-plate">
-            <Image
-              src="/rawsa-designs/cropped/RAWSA_logo.png"
-              alt="Rawsa"
-              width={180}
-              height={54}
-            />
-          </span>
+          <Image
+            src="/rawsa-designs/cropped/RAWSA_logo.png"
+            alt="Rawsa"
+            width={130}
+            height={39}
+            className="footer-logo"
+          />
           <p>Rawsa by Stoneman Foodtech. Fruit-rich refreshment with a modern Indian botanical spirit.</p>
         </div>
         <div className="footer-links">
