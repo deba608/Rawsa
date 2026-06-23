@@ -243,7 +243,7 @@ const navLinks = [
   { href: "#why", label: "Why Rawsa", id: "why" },
   { href: "#compare", label: "Compare", id: "compare" },
   { href: "#ingredients", label: "Ingredients", id: "ingredients" },
-  { href: "#distributor", label: "Distributor", id: "distributor" },
+  { href: "#login", label: "Sign In", id: "login" },
 ];
 
 export default function Home() {

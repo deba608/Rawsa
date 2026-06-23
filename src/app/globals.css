@@ -111,7 +111,7 @@ button {
   right: 16px;
   bottom: auto;
   z-index: 100;
-  width: min(248px, calc(100vw - 32px));
+  width: min(260px, calc(100vw - 32px));
   max-height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
@@ -167,11 +167,12 @@ button {
 
 .drawer-links a {
   display: block;
-  padding: 9px 12px;
+  padding: 12px 14px;
   border-radius: 12px;
   color: #4d3d34;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: center;
   transition: background 160ms ease, color 160ms ease;
 }
 
