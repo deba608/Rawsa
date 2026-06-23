@@ -607,10 +607,9 @@ h3 {
 
 .stat-item strong {
   display: block;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 900;
-  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
   line-height: 1;
   background: linear-gradient(135deg, var(--orange), var(--guava));
   -webkit-background-clip: text;
