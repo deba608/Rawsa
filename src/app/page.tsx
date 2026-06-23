@@ -259,12 +259,74 @@ export default function Home() {
   const navSlotRef = useRef<HTMLSpanElement>(null);
   const drawerSlotRef = useRef<HTMLSpanElement>(null);
   const flyRef = useRef<HTMLImageElement>(null);
+  const lineupRef = useRef<HTMLDivElement>(null);
   const flyReady = useRef(false);
+  const isScrollingRef = useRef(false);
 
   const handleProduct = (product: Product) => {
     setActiveProduct(product);
     setFlipped(false);
+
+    // Scroll lineup to center this product on mobile
+    const container = lineupRef.current;
+    if (!container || window.innerWidth > 720) return;
+
+    const index = products.findIndex((p) => p.id === product.id);
+    if (index !== -1) {
+      const children = Array.from(container.querySelectorAll(".hero-bottle")) as HTMLElement[];
+      const child = children[index];
+      if (child) {
+        isScrollingRef.current = true;
+        const targetScroll = child.offsetLeft - (container.offsetWidth - child.offsetWidth) / 2;
+        container.scrollTo({ left: targetScroll, behavior: "smooth" });
+        // Release lock after scroll completes
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 500);
+      }
+    }
   };
+
+  const handleLineupScroll = () => {
+    if (isScrollingRef.current) return;
+    const container = lineupRef.current;
+    if (!container || window.innerWidth > 720) return;
+
+    const containerCenter = container.scrollLeft + container.offsetWidth / 2;
+    const children = Array.from(container.querySelectorAll(".hero-bottle")) as HTMLElement[];
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    children.forEach((child, index) => {
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const distance = Math.abs(containerCenter - childCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (products[closestIndex] && products[closestIndex].id !== activeProduct.id) {
+      setActiveProduct(products[closestIndex]);
+    }
+  };
+
+  // Center initial active product on mobile mount
+  useEffect(() => {
+    const container = lineupRef.current;
+    if (!container || window.innerWidth > 720) return;
+
+    const index = products.findIndex((p) => p.id === activeProduct.id);
+    if (index !== -1) {
+      const children = Array.from(container.querySelectorAll(".hero-bottle")) as HTMLElement[];
+      const child = children[index];
+      if (child) {
+        const targetScroll = child.offsetLeft - (container.offsetWidth - child.offsetWidth) / 2;
+        container.scrollLeft = targetScroll;
+      }
+    }
+  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -539,12 +601,12 @@ export default function Home() {
         <div className="hero-stage" aria-label="Rawsa product range">
           <div className="hero-burst hero-burst-one" />
           <div className="hero-burst hero-burst-two" />
-          <div className="product-lineup">
+          <div className="product-lineup" ref={lineupRef} onScroll={handleLineupScroll}>
             {products.map((product, index) => (
               <button
                 key={product.id}
                 type="button"
-                className={`hero-bottle hero-bottle-${index}`}
+                className={`hero-bottle hero-bottle-${index}${activeProduct.id === product.id ? " is-active" : ""}`}
                 onClick={() => handleProduct(product)}
                 aria-label={`Show ${product.name}`}
               >
