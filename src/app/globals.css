@@ -782,8 +782,25 @@ h3 {
   line-height: 1.65;
 }
 
+.buy-now {
+  margin-top: 22px;
+  gap: 10px;
+  align-self: flex-start;
+  color: #ffffff;
+  background: linear-gradient(135deg, #25d366, #128c4f);
+  box-shadow: 0 14px 30px rgba(18, 140, 79, 0.32);
+}
+
+.buy-now svg {
+  flex: none;
+}
+
+.buy-now:hover {
+  box-shadow: 0 20px 40px rgba(18, 140, 79, 0.4);
+}
+
 .flip-hint {
-  margin-top: 20px !important;
+  margin-top: 14px !important;
   display: inline-flex;
   align-items: center;
   gap: 6px;
