@@ -1393,6 +1393,11 @@ h3 {
   }
 }
 
+@keyframes scroll-hint {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-40px); }
+}
+
 .flying-logo-container {
   display: none;
 }
@@ -1551,10 +1556,30 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 28px;
+  }
+
+  .hero-copy > * {
+    margin: 0 !important;
   }
 
   .claim-row {
-    justify-content: center;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%) !important;
+    padding: 0 24px !important;
+    justify-content: flex-start !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .claim-row::-webkit-scrollbar {
+    display: none;
+  }
+  .claim-row span {
+    flex-shrink: 0;
+    animation: scroll-hint 1.6s ease-in-out 0.8s 1;
   }
 
   .hero-stats {
@@ -1580,7 +1605,6 @@ h3 {
     justify-content: center;
     align-items: flex-end;
     height: 196px;
-    margin: 16px 0 22px;
     overflow: hidden;
     border-radius: 22px;
     background:

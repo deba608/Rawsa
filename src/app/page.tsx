@@ -509,17 +509,17 @@ export default function Home() {
           <div className="hero-stats" aria-label="Rawsa at a glance">
             <div className="stat-item">
               <strong>5</strong>
-              <span>Flavours</span>
+              <span>Different<br/>Flavours</span>
             </div>
             <div className="stat-divider" />
             <div className="stat-item">
               <strong>0</strong>
-              <span>Artificial Sweeteners</span>
+              <span>Artificial<br/>Sweeteners</span>
             </div>
             <div className="stat-divider" />
             <div className="stat-item">
               <strong>100%</strong>
-              <span>Fruit-led</span>
+              <span>Natural<br/>Fruit</span>
             </div>
           </div>
         </div>
