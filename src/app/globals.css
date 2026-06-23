@@ -163,6 +163,7 @@ button {
   flex-direction: column;
   padding: 8px 10px;
   gap: 2px;
+  flex: 1;
 }
 
 .drawer-links a {
@@ -182,10 +183,23 @@ button {
   color: var(--orange);
 }
 
+.drawer-links a:last-child {
+  margin-top: auto;
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+
 .drawer-cta {
   margin: 4px 10px 12px;
   min-height: 42px;
   text-align: center;
+  background: var(--ink);
+  box-shadow: 0 12px 24px rgba(36, 21, 15, 0.2);
+}
+
+.drawer-cta:hover {
+  background: #000;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── Topbar ─────────────────────────────────────────────────── */
