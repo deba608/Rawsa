@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import type { CSSProperties, FormEvent } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type Product = {
   id: string;
@@ -251,6 +253,11 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("hero");
 
+  const navSlotRef = useRef<HTMLSpanElement>(null);
+  const drawerSlotRef = useRef<HTMLSpanElement>(null);
+  const flyRef = useRef<HTMLImageElement>(null);
+  const flyReady = useRef(false);
+
   const handleProduct = (product: Product) => {
     setActiveProduct(product);
     setFlipped(false);
@@ -303,14 +310,78 @@ export default function Home() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Flying logo (FLIP): navbar slot <-> drawer slot
+  useIsoLayoutEffect(() => {
+    const fly = flyRef.current;
+    const navSlot = navSlotRef.current;
+    const drawerSlot = drawerSlotRef.current;
+    if (!fly || !navSlot) return;
+
+    const place = (animate: boolean) => {
+      const useDrawer = mobileMenuOpen && drawerSlot && drawerSlot.offsetWidth > 0;
+      const target = useDrawer ? drawerSlot! : navSlot;
+      const prev = fly.getBoundingClientRect();
+      const r = target.getBoundingClientRect();
+      fly.style.width = `${r.width}px`;
+      fly.style.top = `${r.top}px`;
+      fly.style.left = `${r.left}px`;
+      fly.style.opacity = "1";
+      if (!animate || !flyReady.current || prev.width === 0) {
+        flyReady.current = true;
+        return;
+      }
+      const next = fly.getBoundingClientRect();
+      const dx = prev.left - next.left;
+      const dy = prev.top - next.top;
+      const ds = prev.width / next.width || 1;
+      fly.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px) scale(${ds})` },
+          { transform: "none" },
+        ],
+        { duration: 560, easing: "cubic-bezier(0.34, 1.56, 0.64, 1)" }
+      );
+      flyReady.current = true;
+    };
+
+    place(true);
+    const onResize = () => place(false);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [mobileMenuOpen]);
+
   return (
     <main className="site-shell">
+      {/* Flying logo — animates between navbar and drawer */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        ref={flyRef}
+        src="/rawsa-designs/cropped/RAWSA_logo.png"
+        alt=""
+        aria-hidden="true"
+        className="logo-fly logo-dark"
+      />
+
       {/* Mobile overlay */}
       <div
         className={`mobile-overlay${mobileMenuOpen ? " is-open" : ""}`}
         onClick={() => setMobileMenuOpen(false)}
         aria-hidden="true"
       />
+
+      {/* Flying Logo for Mobile */}
+      <div 
+        className={`flying-logo-container${mobileMenuOpen ? " is-flying" : ""}`} 
+        aria-hidden="true"
+      >
+        <Image
+          src="/rawsa-designs/cropped/RAWSA_logo.png"
+          alt="Rawsa"
+          width={140}
+          height={42}
+          className="logo-dark"
+        />
+      </div>
 
       {/* Mobile drawer */}
       <nav
@@ -319,7 +390,9 @@ export default function Home() {
         aria-hidden={!mobileMenuOpen}
       >
         <div className="drawer-head">
-          <Image src="/rawsa-designs/cropped/RAWSA_logo.png" alt="Rawsa" width={100} height={30} className="logo-dark" />
+          <span className="logo-slot" ref={drawerSlotRef}>
+            <Image src="/rawsa-designs/cropped/RAWSA_logo.png" alt="Rawsa" width={100} height={30} className="logo-dark logo-ghost drawer-logo" />
+          </span>
           <button
             className="drawer-close"
             type="button"
@@ -351,14 +424,16 @@ export default function Home() {
       {/* Top navigation */}
       <nav className="topbar" aria-label="Primary navigation">
         <a className="brand-mark" href="#hero" aria-label="Rawsa home">
-          <Image
-            src="/rawsa-designs/cropped/RAWSA_logo.png"
-            alt="Rawsa"
-            width={140}
-            height={42}
-            priority
-            className="logo-dark"
-          />
+          <span className="logo-slot nav-slot" ref={navSlotRef}>
+            <Image
+              src="/rawsa-designs/cropped/RAWSA_logo.png"
+              alt="Rawsa"
+              width={140}
+              height={42}
+              priority
+              className="logo-dark logo-ghost nav-logo"
+            />
+          </span>
           <span className="brand-company">by Stoneman Foodtech</span>
         </a>
         <div className="nav-links" role="list">
@@ -397,10 +472,8 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Stoneman Foodtech presents</p>
           <h1>
-            <span>Real</span>
-            <span>fruit.</span>
-            <span>Herbal</span>
-            <span>refreshment</span>
+            <span>Real fruit.</span>
+            <span>Herbal refreshment</span>
             <span>Rawsa.</span>
           </h1>
           <div className="mobile-product-strip" aria-label="Rawsa featured products">

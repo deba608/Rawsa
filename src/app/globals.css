@@ -91,8 +91,8 @@ button {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(36, 21, 15, 0.48);
-  backdrop-filter: blur(4px);
+  background: rgba(36, 21, 15, 0.32);
+  backdrop-filter: blur(10px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 260ms ease;
@@ -107,31 +107,37 @@ button {
 
 .mobile-drawer {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  top: 16px;
+  right: 16px;
+  bottom: auto;
   z-index: 100;
-  width: min(340px, 88vw);
+  width: min(248px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
   gap: 0;
   padding: 0;
-  background: #fffdf8;
-  box-shadow: -24px 0 80px rgba(96, 48, 16, 0.18);
-  transform: translateX(110%);
-  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 253, 248, 0.82);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(96, 48, 16, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
   overflow-y: auto;
 }
 
 .mobile-drawer.is-open {
-  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .drawer-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 20px 16px;
+  padding: 14px 16px 12px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -155,14 +161,13 @@ button {
 .drawer-links {
   display: flex;
   flex-direction: column;
-  padding: 12px 16px;
+  padding: 8px 10px;
   gap: 2px;
-  flex: 1;
 }
 
 .drawer-links a {
   display: block;
-  padding: 13px 14px;
+  padding: 9px 12px;
   border-radius: 12px;
   color: #4d3d34;
   font-size: 15px;
@@ -177,7 +182,8 @@ button {
 }
 
 .drawer-cta {
-  margin: 16px;
+  margin: 4px 10px 12px;
+  min-height: 42px;
   text-align: center;
 }
 
@@ -210,9 +216,37 @@ button {
   min-width: 0;
 }
 
-.brand-mark > img {
+.logo-slot {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-logo {
   width: 130px;
   height: auto;
+}
+
+.drawer-logo {
+  width: 96px;
+  height: auto;
+}
+
+/* Ghost placeholders reserve space; the flyer is the only visible logo */
+.logo-ghost {
+  visibility: hidden;
+}
+
+.logo-fly {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  width: 130px;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: top left;
+  will-change: transform, top, left;
 }
 
 .logo-plate {
@@ -407,6 +441,7 @@ button {
   font-weight: 950;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 h1,
@@ -1357,15 +1392,45 @@ h3 {
   }
 }
 
+.flying-logo-container {
+  display: none;
+}
+
 /* ─── Tablet (≤1040px) ───────────────────────────────────────── */
 
 @media (max-width: 1040px) {
   .topbar {
-    grid-template-columns: auto 1fr auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    min-height: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 253, 248, 0.45);
+    backdrop-filter: blur(22px) saturate(140%);
+    box-shadow: 0 6px 24px rgba(96, 48, 16, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+  }
+
+  /* keep nav text crisp over translucent glass */
+  .brand-company,
+  .nav-cta {
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
   }
 
   .nav-links {
     display: none;
+  }
+
+  .nav-right {
+    flex: 1;
+    justify-content: flex-end;
   }
 
   .hamburger {
@@ -1424,18 +1489,26 @@ h3 {
 /* ─── Mobile (≤720px) ────────────────────────────────────────── */
 
 @media (max-width: 720px) {
-  .topbar {
-    top: 10px;
-    width: calc(100% - 20px);
-    min-height: 62px;
-    gap: 10px;
-    padding: 8px;
-    border-radius: 14px;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+  .flying-logo-container {
+    top: 14.5px;
+    left: 16px;
   }
 
-  .brand-mark > img {
-    width: 96px;
+  .flying-logo-container img {
+    width: 110px;
+    height: auto;
+  }
+
+  .flying-logo-container.is-flying {
+    transform: scale(0.909);
+  }
+
+  .topbar {
+    padding: 8px 16px;
+  }
+
+  .nav-logo {
+    width: 150px;
   }
 
   .brand-company {
@@ -1468,8 +1541,19 @@ h3 {
   }
 
   .hero-actions {
-    align-items: stretch;
+    align-items: center;
     flex-direction: column;
+  }
+
+  .hero-copy {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .claim-row {
+    justify-content: center;
   }
 
   .hero-stats {
@@ -1626,16 +1710,25 @@ h3 {
 /* ─── Extra-small phones (≤420px) ───────────────────────────── */
 
 @media (max-width: 420px) {
-  .topbar {
-    width: calc(100% - 16px);
-    min-height: 56px;
-    border-radius: 12px;
-    gap: 8px;
-    padding: 6px 8px;
+  .flying-logo-container {
+    top: 13px;
+    left: 14px;
   }
 
-  .brand-mark > img {
-    width: 78px;
+  .flying-logo-container img {
+    width: 100px;
+  }
+
+  .flying-logo-container.is-flying {
+    transform: scale(1);
+  }
+
+  .topbar {
+    padding: 7px 14px;
+  }
+
+  .nav-logo {
+    width: 132px;
   }
 
   h1 {
