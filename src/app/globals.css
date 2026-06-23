@@ -406,17 +406,14 @@ button {
   gap: 5px;
   width: 46px;
   height: 46px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  border: 0;
   background: transparent;
   padding: 0;
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  transition: opacity 180ms ease;
 }
 
 .hamburger:hover {
-  background: rgba(249, 115, 22, 0.06);
-  border-color: rgba(249, 115, 22, 0.4);
-  transform: translateY(-2px);
+  opacity: 0.6;
 }
 
 .ham-line {
@@ -547,8 +544,20 @@ h3 {
 
 .claim-row {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.claim-track {
+  display: flex;
+  flex-wrap: nowrap;
   gap: 10px;
+  width: max-content;
+}
+
+.claim-track span {
+  flex-shrink: 0;
 }
 
 .claim-row span,
@@ -1463,6 +1472,16 @@ h3 {
   50% { transform: translateX(-40px); }
 }
 
+@keyframes marquee-track {
+  0%, 10% { transform: translateX(0); }
+  90%, 100% { transform: translateX(calc(-100% + 100vw - 48px)); }
+}
+
+.claim-track {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .flying-logo-container {
   display: none;
 }
@@ -1631,22 +1650,14 @@ h3 {
   }
 
   .claim-row {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
+    overflow-x: hidden;
     width: 100vw;
     margin-left: calc(-50vw + 50%) !important;
     padding: 0 24px !important;
     justify-content: flex-start !important;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
   }
-  .claim-row::-webkit-scrollbar {
-    display: none;
-  }
-  .claim-row span {
-    flex-shrink: 0;
-    animation: scroll-hint 1.6s ease-in-out 0.8s 1;
+  .claim-track {
+    animation: marquee-track 10s ease-in-out infinite alternate;
   }
 
   .hero-stats {

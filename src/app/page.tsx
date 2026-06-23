@@ -507,10 +507,12 @@ export default function Home() {
             </a>
           </div>
           <div className="claim-row" aria-label="Rawsa product highlights">
-            <span>Higher pulp feel</span>
-            <span>No added colour</span>
-            <span>No added sugar</span>
-            <span>No artificial sweetener</span>
+            <div className="claim-track">
+              <span>Higher pulp feel</span>
+              <span>No added colour</span>
+              <span>No added sugar</span>
+              <span>No artificial sweetener</span>
+            </div>
           </div>
           <div className="hero-stats" aria-label="Rawsa at a glance">
             <div className="stat-item">
