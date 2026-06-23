@@ -374,11 +374,22 @@ button {
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.nav-cta,
 .primary-button {
   color: #fffaf0;
   background: linear-gradient(135deg, #f97316, #dc2626);
   box-shadow: 0 15px 32px rgba(249, 115, 22, 0.26);
+}
+
+.nav-cta {
+  color: #fff;
+  background: #000;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.nav-cta:hover {
+  background: #1a1a1a;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
 }
 
 .secondary-button {
@@ -387,7 +398,6 @@ button {
   background: rgba(255, 255, 255, 0.72);
 }
 
-.nav-cta:hover,
 .primary-button:hover,
 .secondary-button:hover {
   transform: translateY(-2px);
