@@ -336,15 +336,24 @@ button {
 .nav-signin {
   display: inline-flex;
   align-items: center;
-  color: var(--ink);
+  justify-content: center;
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0 22px;
+  font-weight: 900;
   font-size: 14px;
-  font-weight: 800;
-  padding: 0 12px;
-  transition: color 180ms ease;
+  white-space: nowrap;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: transparent;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .nav-signin:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  background: rgba(249, 115, 22, 0.06);
   color: var(--orange);
+  transform: translateY(-2px);
 }
 
 .nav-cta,
