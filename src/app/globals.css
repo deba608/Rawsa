@@ -333,6 +333,20 @@ button {
   gap: 10px;
 }
 
+.nav-signin {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 0 12px;
+  transition: color 180ms ease;
+}
+
+.nav-signin:hover {
+  color: var(--orange);
+}
+
 .nav-cta,
 .primary-button,
 .secondary-button {
@@ -1225,10 +1239,20 @@ h3 {
   margin-bottom: 28px;
   padding: 56px;
   border-radius: 36px;
-  background:
-    radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.16), transparent 22rem),
-    linear-gradient(135deg, #fffbeb, #ffffff 48%, #fff1f2);
-  box-shadow: var(--shadow);
+  background: #000;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+}
+
+.distributor-section .eyebrow {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.distributor-section h2 {
+  color: #fff;
+}
+
+.distributor-copy p {
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .enquiry-form {
@@ -1440,7 +1464,8 @@ h3 {
 
   /* keep nav text crisp over translucent glass */
   .brand-company,
-  .nav-cta {
+  .nav-cta,
+  .nav-signin {
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
   }
 
@@ -1535,7 +1560,8 @@ h3 {
     display: none;
   }
 
-  .nav-cta {
+  .nav-cta,
+  .nav-signin {
     display: none !important;
   }
 

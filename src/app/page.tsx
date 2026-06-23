@@ -437,7 +437,7 @@ export default function Home() {
           <span className="brand-company">by Stoneman Foodtech</span>
         </a>
         <div className="nav-links" role="list">
-          {navLinks.map(({ href, label, id }) => (
+          {navLinks.filter(l => l.id !== "login").map(({ href, label, id }) => (
             <a
               key={id}
               href={href}
@@ -449,6 +449,9 @@ export default function Home() {
           ))}
         </div>
         <div className="nav-right">
+          <a className="nav-signin" href="#login">
+            Sign In
+          </a>
           <a className="nav-cta" href="#distributor">
             Distributor Enquiry
           </a>
