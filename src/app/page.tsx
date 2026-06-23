@@ -512,6 +512,10 @@ export default function Home() {
               <span>No added colour</span>
               <span>No added sugar</span>
               <span>No artificial sweetener</span>
+              <span>Higher pulp feel</span>
+              <span>No added colour</span>
+              <span>No added sugar</span>
+              <span>No artificial sweetener</span>
             </div>
           </div>
           <div className="hero-stats" aria-label="Rawsa at a glance">

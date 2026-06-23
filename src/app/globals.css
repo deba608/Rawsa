@@ -547,6 +547,8 @@ h3 {
   justify-content: center;
   width: 100%;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .claim-track {
@@ -554,10 +556,16 @@ h3 {
   flex-wrap: nowrap;
   gap: 10px;
   width: max-content;
+  animation: marquee 12s linear infinite;
 }
 
 .claim-track span {
   flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 5px)); }
 }
 
 .claim-row span,
@@ -1467,21 +1475,6 @@ h3 {
   }
 }
 
-@keyframes scroll-hint {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-40px); }
-}
-
-@keyframes marquee-track {
-  0%, 10% { transform: translateX(0); }
-  90%, 100% { transform: translateX(calc(-100% + 100vw - 48px)); }
-}
-
-.claim-track {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
 .flying-logo-container {
   display: none;
 }
@@ -1655,9 +1648,6 @@ h3 {
     margin-left: calc(-50vw + 50%) !important;
     padding: 0 24px !important;
     justify-content: flex-start !important;
-  }
-  .claim-track {
-    animation: marquee-track 10s ease-in-out infinite alternate;
   }
 
   .hero-stats {
