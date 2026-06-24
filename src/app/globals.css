@@ -1010,8 +1010,8 @@ h3 {
 .compare-wrap {
   border: 1px solid var(--line);
   border-radius: 28px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 18px 60px rgba(96, 48, 16, 0.1);
+  background: #fffdf8;
+  box-shadow: 0 10px 30px rgba(96, 48, 16, 0.06);
   overflow: hidden;
 }
 
@@ -1095,12 +1095,12 @@ h3 {
 }
 
 .drink-col.is-rawsa {
-  background: linear-gradient(180deg, rgba(249, 115, 22, 0.06), rgba(236, 72, 153, 0.04));
+  background: #fff4ec;
   position: relative;
 }
 
 .compare-table thead .drink-col.is-rawsa {
-  background: linear-gradient(180deg, rgba(249, 115, 22, 0.12), rgba(236, 72, 153, 0.06));
+  background: #fde6d6;
 }
 
 .rawsa-col-head {
@@ -1154,31 +1154,49 @@ h3 {
 .compare-legend {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  padding: 14px 20px;
+  flex-wrap: nowrap;
+  gap: 4px 10px;
+  padding: 10px 14px;
   border-top: 1px solid var(--line);
   background: #fffbf4;
-  font-size: 13px;
+  font-size: 11px;
   color: var(--muted);
   font-weight: 600;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.compare-legend::-webkit-scrollbar {
+  display: none;
+}
+
+.compare-legend > span {
+  flex: 0 0 auto;
 }
 
 .compare-legend .cmp-yes,
 .compare-legend .cmp-partial,
 .compare-legend .cmp-no {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
+}
+
+.compare-legend .cmp-yes svg,
+.compare-legend .cmp-partial svg,
+.compare-legend .cmp-no svg {
+  width: 10px;
+  height: 10px;
 }
 
 .compare-note {
-  padding: 0 20px 14px;
+  padding: 10px 16px 14px;
   text-align: left;
   font-size: 11px;
   color: rgba(112, 93, 80, 0.6);
   background: #fffbf4;
   margin: 0;
-  border-top: 0;
+  border-top: 1px solid var(--line);
 }
 
 /* ─── Ingredients section ────────────────────────────────────── */
@@ -1299,7 +1317,7 @@ h3 {
   gap: 26px;
   align-items: center;
   margin-bottom: 28px;
-  padding: 56px;
+  padding: 40px;
   border-radius: 36px;
   background:
     radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.16), transparent 22rem),
@@ -1308,24 +1326,10 @@ h3 {
 }
 
 .enquiry-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  padding: 24px;
-}
-
-.enquiry-form label {
-  display: grid;
-  gap: 8px;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.enquiry-form label:has(textarea),
-.enquiry-form button,
-.form-success {
-  grid-column: 1 / -1;
+  padding: 32px;
 }
 
 .enquiry-form input,
@@ -1336,12 +1340,13 @@ h3 {
   background: #fffdf8;
   color: var(--ink);
   outline: 0;
-  padding: 14px 15px;
+  padding: 16px 18px;
+  font-size: 15px;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .enquiry-form textarea {
-  min-height: 122px;
+  min-height: 120px;
   resize: vertical;
 }
 

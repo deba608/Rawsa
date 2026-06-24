@@ -900,22 +900,10 @@ export default function Home() {
             </div>
           ) : (
             <>
-              <label>
-                Name
-                <input required name="name" placeholder="Your name" autoComplete="name" />
-              </label>
-              <label>
-                Business email
-                <input required type="email" name="email" placeholder="you@company.com" autoComplete="email" />
-              </label>
-              <label>
-                City / market
-                <input required name="city" placeholder="City, State" autoComplete="address-level2" />
-              </label>
-              <label>
-                Message
-                <textarea name="message" placeholder="Tell us about your channel or requirement" />
-              </label>
+              <input required name="name" placeholder="Your name" autoComplete="name" />
+              <input required type="email" name="email" placeholder="you@company.com" autoComplete="email" />
+              <input required name="city" placeholder="City, State" autoComplete="address-level2" />
+              <textarea name="message" placeholder="Tell us about your channel or requirement" />
               <button className="primary-button" type="submit">
                 Send Enquiry
               </button>
