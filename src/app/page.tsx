@@ -942,10 +942,15 @@ export default function Home() {
           <strong>Stoneman Food and Beverages Pvt Ltd</strong>
           <span>Ground Floor, Plot No. 946/2999</span>
           <span>Prasanti Vihar, Barmunda</span>
-          <span>Bhubaneswar – 751003, Odisha</span>
-          <a href="mailto:admin@stonemanfoodtech.com">admin@stonemanfoodtech.com</a>
+          <span>Bhubaneswar – 751003</span>
+          <span>Odisha, India</span>
+          <a href="mailto:info@stonemanfoodtech.com">info@stonemanfoodtech.com</a>
+          <a href="tel:+918018353597">+91 8018-353-597</a>
         </address>
-        <p className="copyright">© {new Date().getFullYear()} Stoneman Food and Beverages Pvt Ltd. All rights reserved.</p>
+        <div className="copyright">
+          <p>© {new Date().getFullYear()} Stoneman Food and Beverages Pvt Ltd.</p>
+          <p>All rights reserved.</p>
+        </div>
       </footer>
     </main>
   );
