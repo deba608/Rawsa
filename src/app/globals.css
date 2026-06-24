@@ -1620,20 +1620,26 @@ h3 {
 
   .hero-section {
     width: min(100% - 24px, 560px);
-    padding-top: 108px;
+    min-height: auto;
+    align-items: start;
+    padding-top: 96px;
     padding-bottom: 24px;
   }
 
   .hero-section::before {
-    inset: 92px -12px 22px;
+    inset: 80px -12px 22px;
     border-radius: 26px;
   }
 
   h1 {
     max-width: 100%;
-    font-size: clamp(2.55rem, 12.2vw, 3.1rem);
-    line-height: 0.98;
+    font-size: clamp(2.3rem, 11vw, 2.9rem);
+    line-height: 1.02;
     overflow-wrap: anywhere;
+  }
+
+  h1 span {
+    white-space: normal;
   }
 
   h2 {
@@ -1970,11 +1976,11 @@ h3 {
   }
 
   .section {
-    padding: 52px 0;
+    padding: 36px 0 48px;
   }
 
   .section-heading {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
 
   .why-card {
