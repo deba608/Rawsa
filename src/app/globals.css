@@ -207,20 +207,19 @@ button {
 .topbar {
   position: fixed;
   z-index: 50;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1180px, calc(100% - 28px));
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   min-height: 72px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  padding: 10px 12px 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.74);
-  border-radius: 18px;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(255, 253, 248, 0.88);
-  box-shadow: 0 18px 50px rgba(96, 48, 16, 0.12);
+  box-shadow: 0 6px 24px rgba(96, 48, 16, 0.08);
   backdrop-filter: blur(18px);
 }
 
@@ -772,15 +771,34 @@ h3 {
   min-height: 690px;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1fr);
-  align-items: center;
-  gap: 24px;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "copy bottle"
+    "buy bottle";
+  align-items: start;
+  gap: 20px 24px;
   padding: 34px;
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
-  border-radius: 34px;
-  background:
-    radial-gradient(circle at 78% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 28rem),
-    linear-gradient(135deg, var(--soft), #fffdf8 46%, #ffffff);
-  box-shadow: var(--shadow);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 28px;
+  background: linear-gradient(150deg, var(--soft), #ffffff 70%);
+  box-shadow: 0 10px 30px rgba(96, 48, 16, 0.06);
+}
+
+.flavour-copy {
+  grid-area: copy;
+}
+
+.flip-product {
+  grid-area: bottle;
+  align-self: center;
+}
+
+.flavour-buy {
+  grid-area: buy;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .product-kicker {
@@ -796,12 +814,11 @@ h3 {
 }
 
 .buy-now {
-  margin-top: 22px;
+  margin-top: 0;
   gap: 10px;
-  align-self: flex-start;
   color: #ffffff;
-  background: linear-gradient(135deg, #25d366, #128c4f);
-  box-shadow: 0 14px 30px rgba(18, 140, 79, 0.32);
+  background: #128c4f;
+  box-shadow: none;
 }
 
 .buy-now svg {
@@ -809,7 +826,7 @@ h3 {
 }
 
 .buy-now:hover {
-  box-shadow: 0 20px 40px rgba(18, 140, 79, 0.4);
+  background: #0f7a45;
 }
 
 .flip-hint {
@@ -1474,29 +1491,13 @@ h3 {
 
 @media (max-width: 1040px) {
   .topbar {
-    top: 0;
-    left: 0;
-    right: 0;
-    transform: none;
-    width: 100%;
     min-height: 0;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    background: rgba(255, 253, 248, 0.45);
-    backdrop-filter: blur(22px) saturate(140%);
-    box-shadow: 0 6px 24px rgba(96, 48, 16, 0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 18px;
-  }
-
-  /* keep nav text crisp over translucent glass */
-  .brand-company,
-  .nav-cta,
-  .nav-signin {
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 253, 248, 0.45);
+    backdrop-filter: blur(22px) saturate(140%);
   }
 
   .nav-links {
@@ -1530,6 +1531,23 @@ h3 {
 
   .flavour-panel {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "copy"
+      "bottle"
+      "buy";
+  }
+
+  .flavour-buy {
+    align-items: stretch;
+  }
+
+  .flavour-buy .buy-now {
+    width: 100%;
+  }
+
+  .flip-hint {
+    align-self: center;
   }
 
   .flavour-selector {
@@ -1755,12 +1773,58 @@ h3 {
 
   .flavour-panel {
     min-height: auto;
-    padding: 22px;
+    padding: 20px 18px;
     border-radius: 24px;
+    gap: 18px;
+  }
+
+  .flavour-copy h3 {
+    font-size: 30px;
+  }
+
+  .flavour-copy p {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .product-kicker {
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  /* Chips: single tidy row that scrolls instead of wrapping ragged */
+  .note-list {
+    margin-top: 16px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .note-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .note-list span {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* Buy button sits below the bottle, full width */
+  .buy-now {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .flip-hint {
+    margin-top: 0 !important;
+    justify-content: center;
   }
 
   .flip-product {
-    height: min(54vh, 400px);
+    height: min(48vh, 360px);
   }
 
   .flavour-selector {
