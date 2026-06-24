@@ -1379,7 +1379,7 @@ h3 {
 .footer-section {
   width: min(1180px, calc(100% - 40px));
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   gap: 28px 40px;
   align-items: start;
   margin: 0 auto 24px;

@@ -931,6 +931,13 @@ export default function Home() {
           <a href="#ingredients">Ingredients</a>
           <a href="#distributor">Distributor Enquiry</a>
         </div>
+        <div className="footer-links">
+          <a href="#about">About Us</a>
+          <a href="#contact">Contact Us</a>
+          <a href="#terms">Terms & Conditions</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#shipping">Shipping & Return</a>
+        </div>
         <address className="footer-address">
           <strong>Stoneman Food and Beverages Pvt Ltd</strong>
           <span>Ground Floor, Plot No. 946/2999</span>
