@@ -1316,8 +1316,8 @@ h3 {
   grid-template-columns: 0.82fr 1fr;
   gap: 26px;
   align-items: center;
-  margin-bottom: 28px;
-  padding: 40px;
+  margin-bottom: 0;
+  padding: 48px 40px 24px;
   border-radius: 36px;
   background:
     radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.16), transparent 22rem),
