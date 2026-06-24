@@ -1877,6 +1877,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .why-grid {
+    gap: 12px;
+  }
+
+  .why-card {
+    min-height: auto;
+    padding: 22px 24px;
+  }
+
   .ingredient-visual {
     min-height: 380px;
   }
