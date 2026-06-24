@@ -677,6 +677,7 @@ export default function Home() {
                   alt={`Rawsa ${activeProduct.name} front label`}
                   width={420}
                   height={1181}
+                  priority
                 />
               </span>
               <span className="flip-face flip-back">
@@ -731,8 +732,10 @@ export default function Home() {
               className="why-card reveal"
               style={{ "--reveal-delay": `${i * 60}ms` } as CSSProperties}
             >
-              <WhyIcon name={icon} />
-              <h3>{title}</h3>
+              <div className="why-header">
+                <WhyIcon name={icon} />
+                <h3>{title}</h3>
+              </div>
               <p>{copy}</p>
             </article>
           ))}
