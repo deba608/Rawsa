@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties, FormEvent } from "react";
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
@@ -924,20 +925,26 @@ export default function Home() {
           />
           <p>Rawsa by Stoneman Foodtech. Fruit-rich refreshment with a modern Indian botanical spirit.</p>
         </div>
-        <div className="footer-links">
-          <a href="#flavours">Flavours</a>
-          <a href="#why">Why Rawsa</a>
-          <a href="#compare">Compare</a>
-          <a href="#ingredients">Ingredients</a>
-          <a href="#distributor">Distributor Enquiry</a>
-        </div>
-        <div className="footer-links">
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact Us</a>
-          <a href="#terms">Terms & Conditions</a>
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#shipping">Shipping & Return</a>
-        </div>
+        <nav className="footer-col" aria-label="Explore">
+          <h4 className="footer-heading">Explore</h4>
+          <div className="footer-links">
+            <a href="#flavours">Flavours</a>
+            <a href="#why">Why Rawsa</a>
+            <a href="#compare">Compare</a>
+            <a href="#ingredients">Ingredients</a>
+            <a href="#distributor">Distributor Enquiry</a>
+          </div>
+        </nav>
+        <nav className="footer-col" aria-label="Company">
+          <h4 className="footer-heading">Company</h4>
+          <div className="footer-links">
+            <a href="#story">About Us</a>
+            <a href="#distributor">Contact Us</a>
+            <Link href="/terms">Terms &amp; Conditions</Link>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/shipping">Shipping &amp; Return</Link>
+          </div>
+        </nav>
         <address className="footer-address">
           <strong>Stoneman Food and Beverages Pvt Ltd</strong>
           <span>Ground Floor, Plot No. 946/2999</span>
