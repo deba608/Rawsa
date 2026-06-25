@@ -1552,29 +1552,47 @@ h3 {
 .footer-address {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   font-style: normal;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: rgba(255, 250, 240, 0.7);
+}
+
+.footer-address .footer-heading {
+  margin-bottom: 4px;
 }
 
 .footer-address strong {
   display: block;
-  margin-bottom: 4px;
   color: rgba(255, 250, 240, 0.95);
   font-size: 13px;
   font-weight: 800;
 }
 
-.footer-address a {
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.footer-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
   color: var(--mango);
-  margin-top: 6px;
   font-weight: 700;
   transition: color 160ms ease;
 }
 
-.footer-address a:hover {
+.footer-contact a svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.footer-contact a:hover {
   color: #fcd34d;
 }
 
@@ -2205,17 +2223,17 @@ h3 {
   }
 
   .footer-address {
-    gap: 3px;
+    gap: 5px;
     font-size: 12px;
   }
 
   .footer-address strong {
     font-size: 12px;
-    margin-bottom: 2px;
   }
 
-  .footer-address a {
-    margin-top: 4px;
+  .footer-contact {
+    margin-top: 6px;
+    gap: 7px;
   }
 
   .copyright {
