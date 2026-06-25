@@ -2152,6 +2152,16 @@ h3 {
     min-width: 116px;
   }
 
+  /* Sticky columns need an opaque background or scrolling cells bleed
+     through. tbody feature cells inherit a transparent background. */
+  .compare-table tbody .feat-col {
+    background: #fffdf8;
+  }
+
+  .compare-table tbody tr:hover .feat-col {
+    background: #fff5ee;
+  }
+
   /* Pin Rawsa beside the feature column so it stays as the comparison
      anchor while the competitor columns scroll past it. */
   .compare-table .drink-col.is-rawsa {
