@@ -507,7 +507,7 @@ textarea:focus-visible,
   margin: 0 0 16px;
   color: var(--orange);
   font-size: 12px;
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   text-align: center;
@@ -525,7 +525,7 @@ h2,
 h3 {
   color: var(--ink);
   font-family: var(--font-display), Georgia, serif;
-  letter-spacing: 0;
+  letter-spacing: -0.015em;
 }
 
 h1 {
@@ -533,6 +533,7 @@ h1 {
   font-size: clamp(3rem, 5.2vw, 5.6rem);
   font-weight: 900;
   line-height: 0.94;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
@@ -845,7 +846,7 @@ h3 {
 .product-kicker {
   margin-bottom: 10px;
   color: var(--accent);
-  font-weight: 950;
+  font-weight: 900;
 }
 
 .flavour-copy p {
@@ -1300,7 +1301,7 @@ h3 {
   margin-bottom: 18px;
   color: var(--leaf);
   font-size: 12px;
-  font-weight: 950;
+  font-weight: 900;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
