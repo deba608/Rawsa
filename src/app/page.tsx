@@ -352,7 +352,7 @@ export default function Home() {
 
   // Scroll reveal
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
+    const els = document.querySelectorAll(".reveal, .reveal-stagger");
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -636,7 +636,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flavour-grid reveal">
+        <div className="flavour-grid reveal reveal-scale">
           <div
             className="flavour-panel"
             style={{ "--accent": activeProduct.accent, "--soft": activeProduct.soft } as CSSProperties}
@@ -757,7 +757,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="compare-wrap reveal">
+        <div className="compare-wrap reveal reveal-scale">
           <div className="compare-scroll">
             <table className="compare-table" role="table">
               <thead>
@@ -831,7 +831,7 @@ export default function Home() {
 
       {/* Ingredients */}
       <section id="ingredients" className="section ingredients-section">
-        <div className="ingredient-visual reveal">
+        <div className="ingredient-visual reveal reveal-left">
           <Image
             src={activeProduct.back}
             alt={`Rawsa ${activeProduct.name} ingredient and nutrition panel`}
@@ -839,7 +839,7 @@ export default function Home() {
             height={1098}
           />
         </div>
-        <div className="ingredient-content reveal">
+        <div className="ingredient-content reveal reveal-right">
           <p className="eyebrow">Ingredient story</p>
           <h2>Fruit first, then a thoughtful herbal signature.</h2>
           <p>
@@ -847,7 +847,7 @@ export default function Home() {
             subtle botanical impression that makes it different from everyday
             juice drinks.
           </p>
-          <div className="ingredient-cards">
+          <div className="ingredient-cards reveal-stagger">
             {ingredientCards.map((card) => (
               <article key={card.label}>
                 <span>{card.label}</span>
@@ -861,7 +861,7 @@ export default function Home() {
 
       {/* Story */}
       <section id="story" className="section story-section">
-        <div className="story-card reveal">
+        <div className="story-card reveal reveal-left">
           <p className="eyebrow">Stoneman Foodtech</p>
           <h2>A modern Indian foodtech brand starting with a drink people notice.</h2>
           <p>
@@ -871,7 +871,7 @@ export default function Home() {
             counters, supermarkets and distributor conversations.
           </p>
         </div>
-        <div className="story-products reveal">
+        <div className="story-products reveal reveal-right reveal-stagger">
           {products.slice(2, 5).map((product) => (
             <Image
               key={product.id}
@@ -886,7 +886,7 @@ export default function Home() {
 
       {/* Distributor */}
       <section id="distributor" className="section distributor-section">
-        <div className="distributor-copy reveal">
+        <div className="distributor-copy reveal reveal-left">
           <p className="eyebrow">Distributor enquiry</p>
           <h2>Bring Rawsa to your market.</h2>
           <p>
@@ -894,7 +894,7 @@ export default function Home() {
             share your details and the Stoneman Foodtech team can follow up.
           </p>
         </div>
-        <form className="enquiry-form reveal" onSubmit={handleSubmit} noValidate>
+        <form className="enquiry-form reveal reveal-right" onSubmit={handleSubmit} noValidate>
           {submitted ? (
             <div className="form-success">
               <strong>Thank you.</strong>

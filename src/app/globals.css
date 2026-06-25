@@ -94,6 +94,7 @@ textarea:focus-visible,
   .reveal-scale {
     opacity: 1;
     transform: none;
+    filter: none;
   }
 
   .claim-track {
@@ -106,30 +107,69 @@ textarea:focus-visible,
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(34px);
+  filter: blur(6px);
   transition:
-    opacity 640ms ease,
-    transform 720ms var(--ease-spring);
+    opacity 720ms ease,
+    transform 820ms var(--ease-spring),
+    filter 720ms ease;
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
+  will-change: opacity, transform, filter;
 }
 
 /* Directional + scale variants — hidden states */
 .reveal-left {
-  transform: translateX(-40px);
+  transform: translateX(-48px);
 }
 
 .reveal-right {
-  transform: translateX(40px);
+  transform: translateX(48px);
 }
 
 .reveal-scale {
-  transform: scale(0.94);
+  transform: scale(0.92);
+}
+
+.reveal-blur-off {
+  filter: none;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+  filter: none;
+}
+
+/* Staggered children — reveal cascades when parent enters view */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(5px);
+  transition:
+    opacity 640ms ease,
+    transform 720ms var(--ease-spring),
+    filter 640ms ease;
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 60ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 140ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 220ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 300ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 380ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 460ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 /* ─── Site shell ─────────────────────────────────────────────── */
