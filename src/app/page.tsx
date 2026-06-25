@@ -871,16 +871,19 @@ export default function Home() {
             counters, supermarkets and distributor conversations.
           </p>
         </div>
-        <div className="story-products reveal reveal-right reveal-stagger">
-          {products.map((product) => (
-            <Image
-              key={product.id}
-              src={product.front}
-              alt={`Rawsa ${product.name}`}
-              width={260}
-              height={732}
-            />
-          ))}
+        <div className="story-products reveal reveal-right">
+          <div className="story-track">
+            {[...products, ...products].map((product, i) => (
+              <Image
+                key={`${product.id}-${i}`}
+                src={product.front}
+                alt={i < products.length ? `Rawsa ${product.name}` : ""}
+                aria-hidden={i >= products.length}
+                width={260}
+                height={732}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
