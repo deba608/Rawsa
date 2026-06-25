@@ -821,6 +821,10 @@ h3 {
   box-shadow: 0 10px 30px rgba(96, 48, 16, 0.06);
 }
 
+.flavour-panel > * {
+  min-width: 0;
+}
+
 .flavour-copy {
   grid-area: copy;
 }
@@ -1696,7 +1700,8 @@ h3 {
     backdrop-filter: blur(22px) saturate(140%);
   }
 
-  .nav-links {
+  .nav-links,
+  .nav-signin {
     display: none;
   }
 
@@ -1892,7 +1897,9 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: 196px;
+    gap: 6px;
+    height: 232px;
+    padding: 0 12px;
     overflow: hidden;
     border-radius: 22px;
     background:
@@ -1902,10 +1909,10 @@ h3 {
 
   .mobile-product-strip img {
     width: auto;
-    height: 218px;
-    margin: 0 -10px -18px;
+    height: 220px;
+    margin: 0;
     object-fit: contain;
-    filter: drop-shadow(0 18px 18px rgba(83, 42, 13, 0.18));
+    filter: drop-shadow(0 14px 16px rgba(83, 42, 13, 0.18));
   }
 
   .hero-stage {

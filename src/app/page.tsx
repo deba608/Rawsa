@@ -451,6 +451,7 @@ export default function Home() {
 
       {/* Mobile drawer */}
       <nav
+        id="mobile-drawer"
         className={`mobile-drawer${mobileMenuOpen ? " is-open" : ""}`}
         aria-label="Mobile navigation"
         aria-hidden={!mobileMenuOpen}
