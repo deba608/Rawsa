@@ -88,7 +88,10 @@ textarea:focus-visible,
     scroll-behavior: auto !important;
   }
 
-  .reveal {
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
     opacity: 1;
     transform: none;
   }
@@ -103,16 +106,30 @@ textarea:focus-visible,
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(28px);
   transition:
-    opacity 560ms ease,
-    transform 560ms ease;
+    opacity 640ms ease,
+    transform 720ms var(--ease-spring);
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* Directional + scale variants — hidden states */
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal-scale {
+  transform: scale(0.94);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 /* ─── Site shell ─────────────────────────────────────────────── */
