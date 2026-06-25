@@ -1020,6 +1020,9 @@ h3 {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(249, 115, 22, 0.28) transparent;
+  /* fade the right edge so cut-off columns read as "scroll for more" */
+  -webkit-mask-image: linear-gradient(to right, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 92%, transparent 100%);
 }
 
 .compare-scroll::-webkit-scrollbar {
@@ -1915,22 +1918,41 @@ h3 {
 
   .footer-section {
     width: calc(100% - 24px);
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 20px;
+    padding: 26px 20px 20px;
+  }
+
+  .footer-brand,
+  .footer-address {
+    grid-column: 1 / -1;
+  }
+
+  .footer-links {
+    font-size: 13px;
+    gap: 9px;
   }
 
   .footer-logo {
     width: 100px;
   }
 
+  .compare-table {
+    min-width: 460px;
+  }
+
   .compare-table th,
   .compare-table td {
-    padding: 12px 14px;
+    padding: 12px 10px;
     font-size: 13px;
   }
 
   .feat-col {
-    min-width: 150px;
+    min-width: 132px;
+  }
+
+  .drink-col {
+    min-width: 104px;
   }
 }
 
