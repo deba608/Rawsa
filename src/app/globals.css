@@ -1818,6 +1818,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  /* Stacked distributor — flatten form so it isn't a card-inside-a-card */
+  .enquiry-form {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    gap: 14px;
+  }
+
   .footer-section {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 28px 32px;
@@ -2179,15 +2188,6 @@ h3 {
   .ingredient-cards,
   .enquiry-form {
     grid-template-columns: 1fr;
-  }
-
-  /* Flatten form on mobile — no nested card inside the pink section */
-  .enquiry-form {
-    padding: 0;
-    border: none;
-    background: transparent;
-    box-shadow: none;
-    gap: 14px;
   }
 
   .why-grid {
