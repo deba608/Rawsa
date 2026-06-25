@@ -872,7 +872,7 @@ export default function Home() {
           </p>
         </div>
         <div className="story-products reveal reveal-right reveal-stagger">
-          {products.slice(2, 5).map((product) => (
+          {products.map((product) => (
             <Image
               key={product.id}
               src={product.front}

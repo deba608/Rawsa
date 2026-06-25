@@ -1392,23 +1392,35 @@ h3 {
   align-items: flex-end;
   justify-content: center;
   gap: 0;
-  border-radius: 34px;
+  padding: 20px 10px;
   background:
-    linear-gradient(135deg, rgba(63, 143, 75, 0.12), transparent 40%),
-    linear-gradient(180deg, #fff, #fff0dc);
+    radial-gradient(ellipse 70% 60% at 50% 92%, rgba(63, 143, 75, 0.16), transparent 70%);
 }
 
 .story-products img {
   width: auto;
-  max-height: 460px;
-  margin: 0 -22px;
+  max-height: 380px;
+  margin: 0 -26px;
   object-fit: contain;
-  filter: drop-shadow(0 28px 28px rgba(83, 42, 13, 0.18));
+  filter: drop-shadow(0 26px 26px rgba(83, 42, 13, 0.2));
 }
 
-.story-products img:nth-child(2) {
-  max-height: 500px;
+/* Fan arrangement — centre bottle tallest, sides step down */
+.story-products img:nth-child(1),
+.story-products img:nth-child(5) {
+  max-height: 340px;
+  z-index: 1;
+}
+
+.story-products img:nth-child(2),
+.story-products img:nth-child(4) {
+  max-height: 425px;
   z-index: 2;
+}
+
+.story-products img:nth-child(3) {
+  max-height: 475px;
+  z-index: 3;
 }
 
 /* ─── Distributor section ────────────────────────────────────── */
@@ -2179,16 +2191,31 @@ h3 {
   }
 
   .story-products {
-    min-height: 400px;
+    min-height: 0;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 14px 16px 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .story-products img {
-    max-height: 360px;
-    margin: 0 -38px;
+  .story-products::-webkit-scrollbar {
+    display: none;
   }
 
-  .story-products img:nth-child(2) {
-    max-height: 400px;
+  .story-products img,
+  .story-products img:nth-child(1),
+  .story-products img:nth-child(2),
+  .story-products img:nth-child(3),
+  .story-products img:nth-child(4),
+  .story-products img:nth-child(5) {
+    max-height: 300px;
+    margin: 0;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
   }
 
   .distributor-section {
