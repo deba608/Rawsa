@@ -1798,6 +1798,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .footer-section {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px 32px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
   .section {
     padding: 72px 0;
   }
