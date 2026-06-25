@@ -2148,7 +2148,29 @@ h3 {
   }
 
   .drink-col {
-    min-width: 104px;
+    min-width: 116px;
+  }
+
+  /* Pin Rawsa beside the feature column so it stays as the comparison
+     anchor while the competitor columns scroll past it. */
+  .compare-table .drink-col.is-rawsa {
+    position: sticky;
+    left: 132px;
+    z-index: 2;
+    box-shadow: 6px 0 12px -8px rgba(36, 21, 15, 0.18);
+  }
+
+  .compare-table thead .drink-col.is-rawsa {
+    z-index: 3;
+  }
+
+  /* Legend wraps instead of cramming into one scrolling line */
+  .compare-legend {
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    gap: 6px 10px;
+    padding: 12px 14px;
   }
 }
 

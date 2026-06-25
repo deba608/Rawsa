@@ -833,8 +833,8 @@ export default function Home() {
       <section id="ingredients" className="section ingredients-section">
         <div className="ingredient-visual reveal">
           <Image
-            src={activeProduct.front}
-            alt={`Rawsa ${activeProduct.name} bottle`}
+            src={activeProduct.back}
+            alt={`Rawsa ${activeProduct.name} ingredient and nutrition panel`}
             width={390}
             height={1098}
           />
@@ -872,7 +872,7 @@ export default function Home() {
           </p>
         </div>
         <div className="story-products reveal">
-          {products.slice(0, 3).map((product) => (
+          {products.slice(2, 5).map((product) => (
             <Image
               key={product.id}
               src={product.front}
