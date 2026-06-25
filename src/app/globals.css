@@ -2116,8 +2116,8 @@ h3 {
   .footer-section {
     width: calc(100% - 24px);
     grid-template-columns: 1fr 1fr;
-    gap: 22px 20px;
-    padding: 26px 20px 20px;
+    gap: 16px 20px;
+    padding: 20px 16px 16px;
   }
 
   .footer-brand,
@@ -2125,13 +2125,45 @@ h3 {
     grid-column: 1 / -1;
   }
 
+  .footer-brand {
+    gap: 10px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .footer-col {
+    gap: 10px;
+  }
+
   .footer-links {
     font-size: 13px;
-    gap: 9px;
+    gap: 8px;
   }
 
   .footer-logo {
-    width: 100px;
+    width: 88px;
+  }
+
+  .footer-address {
+    gap: 3px;
+    font-size: 12px;
+  }
+
+  .footer-address strong {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .footer-address a {
+    margin-top: 4px;
+  }
+
+  .copyright {
+    padding-top: 14px;
+    font-size: 12px;
   }
 
   .compare-table {
