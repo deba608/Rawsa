@@ -1897,9 +1897,9 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 6px;
-    height: 232px;
-    padding: 0 12px;
+    gap: 4px;
+    height: 196px;
+    padding: 0 10px;
     overflow: hidden;
     border-radius: 22px;
     background:
@@ -1908,20 +1908,18 @@ h3 {
   }
 
   .mobile-product-strip img {
+    min-width: 0;
     width: auto;
-    height: 220px;
+    height: 184px;
     margin: 0;
     object-fit: contain;
-    filter: drop-shadow(0 14px 16px rgba(83, 42, 13, 0.18));
+    filter: drop-shadow(0 12px 14px rgba(83, 42, 13, 0.18));
   }
 
+  /* Carousel is redundant on mobile — the 5-bottle hero strip and the
+     Flavours selector both cover it. Hide to remove duplicate bottles. */
   .hero-stage {
-    min-height: auto;
-    margin-top: 0;
-    padding: 0;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    overflow: visible;
+    display: none;
   }
 
   .product-lineup {

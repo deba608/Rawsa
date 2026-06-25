@@ -546,8 +546,8 @@ export default function Home() {
             <span>Herbal refreshment</span>
             <span>Rawsa.</span>
           </h1>
-          <div className="mobile-product-strip" aria-label="Rawsa featured products">
-            {products.slice(0, 3).map((product) => (
+          <div className="mobile-product-strip" aria-label="Rawsa flavour range">
+            {products.map((product) => (
               <Image
                 key={product.id}
                 src={product.front}
