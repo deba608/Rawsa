@@ -2181,6 +2181,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  /* Flatten form on mobile — no nested card inside the pink section */
+  .enquiry-form {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    gap: 14px;
+  }
+
   .why-grid {
     gap: 12px;
   }
@@ -2219,8 +2228,19 @@ h3 {
 
   .distributor-section {
     width: calc(100% - 24px);
-    padding: 24px;
+    padding: 30px 22px;
     border-radius: 26px;
+    gap: 22px;
+  }
+
+  .enquiry-form input,
+  .enquiry-form textarea {
+    padding: 15px 16px;
+    border-radius: 13px;
+  }
+
+  .enquiry-form textarea {
+    min-height: 104px;
   }
 
   .footer-section {
