@@ -172,11 +172,148 @@ textarea:focus-visible,
   }
 }
 
+/* ─── Skip link ─────────────────────────────────────────────── */
+
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 12px;
+  z-index: 999;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: #24150f;
+  color: #fffaf0;
+  font-weight: 800;
+  font-size: 14px;
+  transition: top 200ms ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
 /* ─── Site shell ─────────────────────────────────────────────── */
 
 .site-shell {
   min-height: 100vh;
   overflow: hidden;
+}
+
+/* ─── Form improvements ──────────────────────────────────────── */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-error-msg {
+  font-size: 12px;
+  font-weight: 700;
+  color: #dc2626;
+  padding-left: 4px;
+}
+
+.field-error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+
+.primary-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 2px 0 #c2530a !important;
+}
+
+/* ─── Spinner ────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── 404 / Error / Loading pages ────────────────────────────── */
+
+.not-found-page,
+.error-page,
+.loading-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--background);
+}
+
+.not-found-card,
+.error-card {
+  text-align: center;
+  max-width: 420px;
+  padding: 48px 36px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow);
+}
+
+.not-found-code {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--orange), var(--guava));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.error-emoji {
+  display: block;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.not-found-card h1,
+.error-card h1 {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  margin-bottom: 12px;
+}
+
+.not-found-card p,
+.error-card p {
+  color: var(--muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.loading-spinner {
+  --ring-size: 44px;
+  width: var(--ring-size);
+  height: var(--ring-size);
+}
+
+.spinner-ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 4px solid rgba(249, 115, 22, 0.15);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
 }
 
 /* ─── Mobile overlay ─────────────────────────────────────────── */
@@ -413,77 +550,123 @@ textarea:focus-visible,
   gap: 10px;
 }
 
-.nav-signin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 46px;
-  border-radius: 999px;
-  padding: 0 22px;
-  font-weight: 900;
-  font-size: 14px;
-  white-space: nowrap;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  background: transparent;
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.nav-signin:hover {
-  border-color: rgba(249, 115, 22, 0.4);
-  background: rgba(249, 115, 22, 0.06);
-  color: var(--orange);
-  transform: translateY(-2px);
-}
+/* ─── Button base ────────────────────────────────────────────── */
 
 .nav-cta,
 .primary-button,
-.secondary-button {
+.secondary-button,
+.nav-signin {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
+  gap: 8px;
+  min-height: 48px;
   border-radius: 999px;
   border: 0;
-  padding: 0 22px;
+  padding: 0 26px;
   font-weight: 900;
-  letter-spacing: 0;
+  font-size: 14px;
+  letter-spacing: 0.01em;
   white-space: nowrap;
-  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 220ms var(--ease-spring),
+    box-shadow 220ms ease,
+    background 200ms ease,
+    color 180ms ease;
 }
 
+/* ─── Primary ────────────────────────────────────────────────── */
+
 .primary-button {
-  color: #fffaf0;
-  background: linear-gradient(135deg, #f97316, #dc2626);
-  box-shadow: 0 15px 32px rgba(249, 115, 22, 0.26);
+  color: #fff;
+  background: rgba(249, 115, 22, 0.92);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 160, 80, 0.45) !important;
+  box-shadow: 0 2px 0 #c2530a, inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
+
+.primary-button:hover {
+  background: rgba(234, 109, 14, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #c2530a, inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #c2530a;
+}
+
+/* ─── Nav CTA (dark glass pill) ─────────────────────────────── */
 
 .nav-cta {
   color: #fff;
-  background: #000;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(36, 21, 15, 0.78);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 .nav-cta:hover {
-  background: #1a1a1a;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+  background: rgba(58, 34, 24, 0.85);
   transform: translateY(-2px);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
+
+.nav-cta:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+}
+
+/* ─── Secondary (frosted glass) ─────────────────────────────── */
 
 .secondary-button {
   color: var(--ink);
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1.5px solid rgba(36, 21, 15, 0.16) !important;
+  box-shadow: 0 2px 12px rgba(96, 48, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.primary-button:hover,
 .secondary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.32);
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.secondary-button:hover {
-  box-shadow: 0 12px 28px rgba(96, 48, 16, 0.12);
+.secondary-button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* ─── Nav sign in (ghost outline) ───────────────────────────── */
+
+.nav-signin {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(36, 21, 15, 0.18) !important;
+  padding: 0 20px;
+  min-height: 44px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.nav-signin:hover {
+  border-color: rgba(249, 115, 22, 0.55) !important;
+  color: #f97316;
+  background: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.nav-signin:active {
+  transform: translateY(0);
 }
 
 /* ─── Hamburger ──────────────────────────────────────────────── */
@@ -548,11 +731,14 @@ textarea:focus-visible,
   position: absolute;
   inset: 116px -80px 42px;
   z-index: -1;
-  border: 1px solid rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 44px;
   background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.78), rgba(255, 244, 200, 0.38)),
-    radial-gradient(circle at 78% 22%, rgba(236, 72, 153, 0.12), transparent 22rem);
+    linear-gradient(120deg, rgba(255, 255, 255, 0.72), rgba(255, 244, 200, 0.38)),
+    radial-gradient(circle at 78% 22%, rgba(236, 72, 153, 0.1), transparent 22rem);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 24px 60px rgba(96, 48, 16, 0.06);
 }
 
 .hero-copy {
@@ -681,9 +867,12 @@ h3 {
   gap: 0;
   margin-top: 28px;
   padding: 16px 22px;
-  border: 1px solid rgba(245, 158, 11, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 4px 24px rgba(96, 48, 16, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   width: fit-content;
   max-width: 100%;
 }
@@ -873,10 +1062,12 @@ h3 {
   align-items: start;
   gap: 20px 24px;
   padding: 34px;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 28px;
-  background: linear-gradient(150deg, var(--soft), #ffffff 70%);
-  box-shadow: 0 10px 30px rgba(96, 48, 16, 0.06);
+  background: rgba(255, 253, 250, 0.55);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 10px 40px rgba(96, 48, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .flavour-panel > * {
@@ -916,8 +1107,11 @@ h3 {
   margin-top: 0;
   gap: 10px;
   color: #ffffff;
-  background: #128c4f;
-  box-shadow: none;
+  background: rgba(18, 140, 79, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 210, 140, 0.3) !important;
+  box-shadow: 0 2px 0 #0a5c34, inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .buy-now svg {
@@ -926,6 +1120,13 @@ h3 {
 
 .buy-now:hover {
   background: #0f7a45;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #0a5c34;
+}
+
+.buy-now:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #0a5c34;
 }
 
 .flip-hint {
@@ -935,8 +1136,11 @@ h3 {
   gap: 7px;
   padding: 7px 14px 7px 12px;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
-  background: color-mix(in srgb, var(--accent) 9%, #fff);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 8px rgba(249, 115, 22, 0.1);
   font-size: 11.5px !important;
   font-weight: 800 !important;
   color: var(--accent) !important;
@@ -1031,9 +1235,12 @@ h3 {
   grid-template-columns: 58px 1fr;
   align-items: center;
   gap: 16px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.74);
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 10px rgba(96, 48, 16, 0.05);
   padding: 12px;
   text-align: left;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
@@ -1041,9 +1248,9 @@ h3 {
 
 .flavour-selector button:hover,
 .flavour-selector button.is-active {
-  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
-  background: linear-gradient(135deg, var(--soft), #fff);
-  box-shadow: 0 16px 38px color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: rgba(249, 115, 22, 0.45);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 16px 38px rgba(249, 115, 22, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
 }
 
@@ -1088,16 +1295,18 @@ h3 {
 .why-card {
   min-height: 220px;
   padding: 28px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: var(--radius-card);
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow: 0 18px 50px rgba(96, 48, 16, 0.08);
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 8px 32px rgba(96, 48, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .why-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 28px 60px rgba(96, 48, 16, 0.13);
+  box-shadow: 0 20px 50px rgba(96, 48, 16, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .why-header {
@@ -1115,7 +1324,11 @@ h3 {
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(236, 72, 153, 0.08));
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 12px rgba(249, 115, 22, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   color: var(--orange);
 }
 
@@ -1136,10 +1349,12 @@ h3 {
 }
 
 .compare-wrap {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 28px;
-  background: #fffdf8;
-  box-shadow: 0 10px 30px rgba(96, 48, 16, 0.06);
+  background: rgba(255, 253, 248, 0.55);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 10px 40px rgba(96, 48, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   overflow: hidden;
 }
 
@@ -1325,20 +1540,21 @@ h3 {
   text-align: left;
   font-size: 11px;
   color: rgba(112, 93, 80, 0.6);
-  background: #fffbf4;
+  background: rgba(255, 251, 244, 0.6);
   margin: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* ─── Ingredients section ────────────────────────────────────── */
 
 .ingredient-cards article,
-.story-card,
-.enquiry-form {
-  border: 1px solid var(--line);
+.story-card {
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow: 0 18px 50px rgba(96, 48, 16, 0.08);
+  background: rgba(255, 253, 248, 0.52);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 8px 36px rgba(96, 48, 16, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .ingredients-section {
@@ -1471,29 +1687,44 @@ h3 {
   padding: 48px 40px 24px;
   border-radius: 36px;
   background:
-    radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.16), transparent 22rem),
-    linear-gradient(135deg, #fffbeb, #ffffff 48%, #fff1f2);
-  box-shadow: var(--shadow);
+    radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.14), transparent 22rem),
+    linear-gradient(135deg, rgba(255, 251, 235, 0.9), rgba(255, 255, 255, 0.72) 48%, rgba(255, 241, 242, 0.88));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .enquiry-form {
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 24px;
+  background: rgba(255, 253, 248, 0.52);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 8px 36px rgba(96, 48, 16, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  padding: 32px;
+}
+
+.enquiry-form-inner {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 32px;
 }
 
 .enquiry-form input,
 .enquiry-form textarea {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 14px;
-  background: #fffdf8;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--ink);
   outline: 0;
   padding: 16px 18px;
   font-size: 15px;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  box-shadow: inset 0 1px 3px rgba(96, 48, 16, 0.06);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
 .enquiry-form textarea {
@@ -1853,6 +2084,8 @@ h3 {
     border: none;
     background: transparent;
     box-shadow: none;
+  }
+  .enquiry-form-inner {
     gap: 14px;
   }
 
@@ -2253,8 +2486,7 @@ h3 {
   }
 
   .why-grid,
-  .ingredient-cards,
-  .enquiry-form {
+  .ingredient-cards {
     grid-template-columns: 1fr;
   }
 
