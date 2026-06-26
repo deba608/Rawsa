@@ -2232,15 +2232,15 @@ h3 {
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
-    gap: 6px;
-    padding: 10px 8px;
+    gap: 8px;
+    padding: 16px 8px 12px;
     scroll-snap-align: start;
     width: 88px;
   }
 
   .selector-thumb,
   .selector-thumb img {
-    height: 76px;
+    height: 64px;
   }
 
   .flavour-selector small {
