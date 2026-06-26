@@ -646,9 +646,14 @@ export default function Home() {
               <h3>{activeProduct.name}</h3>
               <p>{activeProduct.tagline}</p>
               <div className="note-list">
-                {activeProduct.notes.map((note) => (
-                  <span key={note}>{note}</span>
-                ))}
+                <div className="note-track">
+                  {activeProduct.notes.map((note) => (
+                    <span key={note}>{note}</span>
+                  ))}
+                  {activeProduct.notes.map((note) => (
+                    <span key={`${note}-dup`} aria-hidden="true">{note}</span>
+                  ))}
+                </div>
               </div>
             </div>
 

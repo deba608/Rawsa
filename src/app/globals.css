@@ -968,6 +968,15 @@ h3 {
   margin-top: 24px;
 }
 
+/* desktop: track is transparent, chips wrap; duplicate set hidden */
+.note-track {
+  display: contents;
+}
+
+.note-list span[aria-hidden="true"] {
+  display: none;
+}
+
 .flip-product {
   position: relative;
   width: min(100%, 350px);
@@ -2147,32 +2156,40 @@ h3 {
     font-size: 13px;
   }
 
-  /* Chips: single tidy row that scrolls instead of wrapping ragged */
+  /* Chips: single row that AUTO-scrolls (marquee) instead of wrapping ragged */
   .note-list {
     margin-top: 16px;
     flex-wrap: nowrap;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    /* bleed to panel edges so chips scroll fully into view, not clipped */
+    overflow: hidden;
+    /* bleed to panel edges + fade both sides for a clean marquee */
     margin-left: -4px;
     margin-right: -4px;
-    padding: 2px 22px 4px 4px;
-    /* fade right edge = visual "there's more, scroll me" cue */
-    -webkit-mask-image: linear-gradient(to right, #000 84%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 84%, transparent 100%);
+    padding: 2px 4px 4px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
   }
 
-  .note-list::-webkit-scrollbar {
-    display: none;
+  .note-track {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    width: max-content;
+    animation: marquee-notes 12s linear infinite;
   }
 
   .note-list span {
     flex: 0 0 auto;
     white-space: nowrap;
-    scroll-snap-align: start;
+  }
+
+  /* show the duplicate set so the loop is seamless */
+  .note-list span[aria-hidden="true"] {
+    display: inline-flex;
+  }
+
+  @keyframes marquee-notes {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 4px)); }
   }
 
   /* Buy button sits below the bottle, full width */
