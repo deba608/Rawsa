@@ -2132,7 +2132,11 @@ h3 {
 
   .section {
     width: calc(100% - 24px);
-    padding: 40px 0 60px;
+    padding: 28px 0 36px;
+  }
+
+  .section-heading {
+    margin-bottom: 20px;
   }
 
   .flavour-panel {
@@ -2489,11 +2493,11 @@ h3 {
   }
 
   .section {
-    padding: 36px 0 48px;
+    padding: 24px 0 32px;
   }
 
   .section-heading {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
   }
 
   .why-card {
