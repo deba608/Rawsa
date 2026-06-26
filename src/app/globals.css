@@ -1435,7 +1435,7 @@ h3 {
   align-items: center;
   gap: 26px;
   width: max-content;
-  animation: story-marquee 26s linear infinite;
+  animation: story-marquee 14s linear infinite;
 }
 
 .story-products:hover .story-track {
@@ -2282,7 +2282,7 @@ h3 {
 
   .story-track {
     gap: 18px;
-    animation-duration: 20s;
+    animation-duration: 8s;
   }
 
   .story-track img {
