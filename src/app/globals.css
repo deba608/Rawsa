@@ -1415,49 +1415,49 @@ h3 {
   padding: 38px;
 }
 
+/* Desktop: static fan — all 5 bottles visible at once */
 .story-products {
   position: relative;
-  min-height: 460px;
+  min-height: 500px;
   display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: 20px 0;
-  border-radius: 30px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px 10px;
   background:
-    radial-gradient(ellipse 75% 60% at 50% 95%, rgba(63, 143, 75, 0.15), transparent 70%);
-  /* fade edges so bottles glide in/out softly */
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+    radial-gradient(ellipse 70% 60% at 50% 92%, rgba(63, 143, 75, 0.16), transparent 70%);
 }
 
 .story-track {
   display: flex;
-  align-items: center;
-  gap: 26px;
-  width: max-content;
-  animation: story-marquee 14s linear infinite;
-}
-
-.story-products:hover .story-track {
-  animation-play-state: paused;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
 }
 
 .story-track img {
   width: auto;
   max-height: 380px;
+  margin: 0 -24px;
   object-fit: contain;
-  filter: drop-shadow(0 24px 24px rgba(83, 42, 13, 0.2));
+  filter: drop-shadow(0 26px 26px rgba(83, 42, 13, 0.2));
 }
 
-@keyframes story-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 13px)); } /* half the track + half a gap = seamless */
-}
+/* Fan — centre tallest, step down symmetrically */
+.story-track img:nth-child(1),
+.story-track img:nth-child(10) { max-height: 330px; z-index: 1; }
+.story-track img:nth-child(2),
+.story-track img:nth-child(9)  { max-height: 400px; z-index: 2; }
+.story-track img:nth-child(3),
+.story-track img:nth-child(8)  { max-height: 460px; z-index: 3; }
+.story-track img:nth-child(4),
+.story-track img:nth-child(7)  { max-height: 400px; z-index: 2; }
+.story-track img:nth-child(5),
+.story-track img:nth-child(6)  { max-height: 330px; z-index: 1; }
 
-@media (prefers-reduced-motion: reduce) {
-  .story-track {
-    animation: none;
-  }
+/* Hide duplicate set on desktop — only show first 5 */
+.story-track img:nth-child(n+6) {
+  display: none;
 }
 
 /* ─── Distributor section ────────────────────────────────────── */
