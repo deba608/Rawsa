@@ -2212,22 +2212,35 @@ h3 {
   }
 
   .flavour-selector {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .flavour-selector::-webkit-scrollbar {
+    display: none;
   }
 
   .flavour-selector button {
+    flex: 0 0 auto;
     min-height: auto;
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
-    gap: 8px;
-    padding: 12px 8px;
+    gap: 6px;
+    padding: 10px 8px;
+    scroll-snap-align: start;
+    width: 88px;
   }
 
   .selector-thumb,
   .selector-thumb img {
-    height: 84px;
+    height: 76px;
   }
 
   .flavour-selector small {
@@ -2235,7 +2248,7 @@ h3 {
   }
 
   .flavour-selector strong {
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 0;
   }
 
@@ -2259,7 +2272,7 @@ h3 {
   }
 
   .ingredient-visual img {
-    max-height: 360px;
+    max-height: 280px;
   }
 
   .story-products {
@@ -2301,8 +2314,9 @@ h3 {
   .footer-section {
     width: calc(100% - 24px);
     grid-template-columns: 1fr 1fr;
-    gap: 16px 20px;
-    padding: 20px 16px 16px;
+    gap: 12px 16px;
+    padding: 16px 14px 12px;
+    border-radius: 20px;
   }
 
   .footer-brand,
@@ -2311,16 +2325,51 @@ h3 {
   }
 
   .footer-brand {
-    gap: 10px;
+    gap: 6px;
   }
 
   .footer-brand p {
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.45;
   }
 
   .footer-col {
-    gap: 10px;
+    gap: 7px;
+  }
+
+  .footer-heading {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-bottom: 0;
+  }
+
+  .footer-links {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .footer-address {
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  .footer-address strong {
+    font-size: 11px;
+  }
+
+  .footer-contact {
+    margin-top: 4px;
+    gap: 5px;
+  }
+
+  .footer-contact a {
+    font-size: 11.5px;
+    gap: 6px;
+  }
+
+  .copyright {
+    padding-top: 10px;
+    font-size: 10.5px;
   }
 
   .footer-links {
