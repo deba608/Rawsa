@@ -2347,45 +2347,80 @@ h3 {
     font-size: 12px;
   }
 
+  /* All columns fit one screen — no horizontal scroll on mobile */
+  .compare-scroll {
+    overflow-x: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .compare-table {
-    min-width: 460px;
+    min-width: 0;
+    width: 100%;
+    table-layout: fixed;
   }
 
   .compare-table th,
   .compare-table td {
-    padding: 12px 10px;
-    font-size: 13px;
+    padding: 11px 1px;
+    font-size: 11px;
   }
 
   .feat-col {
-    min-width: 132px;
+    min-width: 0;
+    width: 31%;
+    padding-left: 10px !important;
+    padding-right: 4px;
+    font-size: 11px;
+    /* not sticky — whole table is on screen now */
+    position: static;
+  }
+
+  .compare-table thead .feat-col {
+    font-size: 10px;
+    letter-spacing: 0.06em;
   }
 
   .drink-col {
-    min-width: 116px;
+    min-width: 0;
+    width: 17.25%;
+    font-size: 9.5px;
+    line-height: 1.2;
+    word-break: break-word;
+    position: static;
   }
 
-  /* Sticky columns need an opaque background or scrolling cells bleed
-     through. tbody feature cells inherit a transparent background. */
+  /* Rawsa header logo + badge shrink to fit the narrow column */
+  .rawsa-col-head {
+    gap: 5px;
+  }
+
+  .rawsa-col-head img {
+    width: 100%;
+    max-width: 58px;
+    height: auto;
+  }
+
+  .rawsa-badge {
+    padding: 2px 7px;
+    font-size: 8.5px;
+    letter-spacing: 0.03em;
+  }
+
+  /* Tighter status icons so 4 columns breathe in one row */
+  .cmp-yes,
+  .cmp-partial,
+  .cmp-no {
+    width: 26px;
+    height: 26px;
+  }
+
   .compare-table tbody .feat-col {
     background: #fffdf8;
   }
 
   .compare-table tbody tr:hover .feat-col {
     background: #fff5ee;
-  }
-
-  /* Pin Rawsa beside the feature column so it stays as the comparison
-     anchor while the competitor columns scroll past it. */
-  .compare-table .drink-col.is-rawsa {
-    position: sticky;
-    left: 132px;
-    z-index: 2;
-    box-shadow: 6px 0 12px -8px rgba(36, 21, 15, 0.18);
-  }
-
-  .compare-table thead .drink-col.is-rawsa {
-    z-index: 3;
   }
 
   /* Legend wraps instead of cramming into one scrolling line */
