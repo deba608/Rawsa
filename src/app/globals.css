@@ -565,6 +565,18 @@ textarea:focus-visible,
   background: rgba(255, 253, 248, 0.88);
   box-shadow: 0 6px 24px rgba(96, 48, 16, 0.08);
   backdrop-filter: blur(18px);
+  animation: topbar-slide-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes topbar-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .brand-mark {
@@ -572,6 +584,12 @@ textarea:focus-visible,
   align-items: center;
   gap: 12px;
   min-width: 0;
+  animation: brand-fade-in 0.5s ease 0.3s both;
+}
+
+@keyframes brand-fade-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .logo-slot {
@@ -1821,18 +1839,20 @@ h3 {
   margin-bottom: 0;
   padding: 40px 36px 32px;
   border-radius: 36px;
-  background: var(--background);
-  border: none;
-  box-shadow: 20px 20px 40px rgba(214, 209, 201, 0.7),
-             -20px -20px 40px #ffffff;
+  background: rgba(255, 250, 240, 0.4);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 40px rgba(96, 48, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .enquiry-form {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 24px;
-  background: var(--background);
-  box-shadow: 8px 8px 16px rgba(214, 209, 201, 0.7),
-             -8px -8px 16px #ffffff;
+  background: rgba(255, 253, 248, 0.52);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 8px 36px rgba(96, 48, 16, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
   padding: 32px;
 }
 
@@ -1846,23 +1866,6 @@ h3 {
   align-self: center;
   width: 100%;
   max-width: 220px;
-  background: var(--background);
-  color: var(--ink);
-  border: none;
-  border-radius: 14px;
-  box-shadow: 6px 6px 12px rgba(214, 209, 201, 0.7),
-             -6px -6px 12px #ffffff;
-  transition: all 0.2s ease-in-out;
-}
-
-.enquiry-submit-btn:hover {
-  box-shadow: 4px 4px 8px rgba(214, 209, 201, 0.7),
-             -4px -4px 8px #ffffff;
-}
-
-.enquiry-submit-btn:active {
-  box-shadow: inset 4px 4px 8px rgba(214, 209, 201, 0.7),
-              inset -4px -4px 8px #ffffff;
 }
 
 .send-icon {
@@ -1876,16 +1879,17 @@ h3 {
 .enquiry-form input,
 .enquiry-form textarea {
   width: 100%;
-  border: none;
+  border: 1px solid rgba(36, 21, 15, 0.12);
   border-radius: 14px;
-  background: var(--background);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--ink);
   outline: 0;
   padding: 20px 24px;
   font-size: 15px;
-  box-shadow: inset 6px 6px 12px rgba(214, 209, 201, 0.7),
-              inset -6px -6px 12px #ffffff;
-  transition: box-shadow 160ms ease, background 160ms ease;
+  box-shadow: inset 0 2px 5px rgba(36, 21, 15, 0.05);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
 .enquiry-form textarea {
@@ -1895,8 +1899,8 @@ h3 {
 
 .enquiry-form input:focus,
 .enquiry-form textarea:focus {
-  box-shadow: inset 8px 8px 16px rgba(214, 209, 201, 0.9),
-              inset -8px -8px 16px #ffffff;
+  border-color: rgba(249, 115, 22, 0.62);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
 }
 
 .form-success {
