@@ -160,10 +160,16 @@ export function Navbar({
               {label}
             </a>
           ))}
+          <a
+            href="#distributor"
+            role="listitem"
+            className={activeNav === "distributor" ? "is-active" : ""}
+          >
+            Distributor Enquiry
+          </a>
         </div>
         <div className="nav-right">
-          <a className="nav-signin" href="#login">Sign In</a>
-          <a className="nav-cta" href="#distributor">Distributor Enquiry</a>
+          <a className="primary-button" href="#login">Sign In</a>
           <button
             className="hamburger"
             type="button"
