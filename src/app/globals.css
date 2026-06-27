@@ -648,7 +648,20 @@ textarea:focus-visible,
   display: block;
   padding: 10px 16px;
   border-radius: 12px;
+  white-space: nowrap; /* never break a label onto two lines */
   transition: background 160ms ease, color 160ms ease;
+}
+
+/* Mid-desktop (1041–1200): drop the brand tagline and tighten the link
+   row so all five links stay on one line without wrapping. */
+@media (max-width: 1200px) and (min-width: 1041px) {
+  .brand-company {
+    display: none;
+  }
+
+  .nav-links a {
+    padding: 10px 12px;
+  }
 }
 
 .nav-links a:hover,
