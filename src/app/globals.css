@@ -2696,6 +2696,7 @@ h3 {
     justify-content: flex-start;
     overflow: hidden;
     padding: 14px 0 18px;
+    background: none;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
@@ -2728,6 +2729,7 @@ h3 {
     max-height: 290px;
     margin: 0;
     z-index: auto;
+    filter: none;
   }
 
   @keyframes story-marquee {
