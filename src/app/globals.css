@@ -1821,22 +1821,18 @@ h3 {
   margin-bottom: 0;
   padding: 40px 36px 32px;
   border-radius: 36px;
-  background:
-    radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.14), transparent 22rem),
-    linear-gradient(135deg, rgba(255, 251, 235, 0.9), rgba(255, 255, 255, 0.72) 48%, rgba(255, 241, 242, 0.88));
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  background: var(--background);
+  border: none;
+  box-shadow: 20px 20px 40px rgba(214, 209, 201, 0.7),
+             -20px -20px 40px #ffffff;
 }
 
 .enquiry-form {
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: none;
   border-radius: 24px;
-  background: rgba(255, 253, 248, 0.52);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow: 0 8px 36px rgba(96, 48, 16, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  background: var(--background);
+  box-shadow: 8px 8px 16px rgba(214, 209, 201, 0.7),
+             -8px -8px 16px #ffffff;
   padding: 32px;
 }
 
@@ -1850,6 +1846,23 @@ h3 {
   align-self: center;
   width: 100%;
   max-width: 220px;
+  background: var(--background);
+  color: var(--ink);
+  border: none;
+  border-radius: 14px;
+  box-shadow: 6px 6px 12px rgba(214, 209, 201, 0.7),
+             -6px -6px 12px #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.enquiry-submit-btn:hover {
+  box-shadow: 4px 4px 8px rgba(214, 209, 201, 0.7),
+             -4px -4px 8px #ffffff;
+}
+
+.enquiry-submit-btn:active {
+  box-shadow: inset 4px 4px 8px rgba(214, 209, 201, 0.7),
+              inset -4px -4px 8px #ffffff;
 }
 
 .send-icon {
@@ -1863,17 +1876,16 @@ h3 {
 .enquiry-form input,
 .enquiry-form textarea {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: none;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--background);
   color: var(--ink);
   outline: 0;
   padding: 20px 24px;
   font-size: 15px;
-  box-shadow: inset 0 1px 3px rgba(96, 48, 16, 0.06);
-  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  box-shadow: inset 6px 6px 12px rgba(214, 209, 201, 0.7),
+              inset -6px -6px 12px #ffffff;
+  transition: box-shadow 160ms ease, background 160ms ease;
 }
 
 .enquiry-form textarea {
@@ -1883,8 +1895,8 @@ h3 {
 
 .enquiry-form input:focus,
 .enquiry-form textarea:focus {
-  border-color: rgba(249, 115, 22, 0.62);
-  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+  box-shadow: inset 8px 8px 16px rgba(214, 209, 201, 0.9),
+              inset -8px -8px 16px #ffffff;
 }
 
 .form-success {
