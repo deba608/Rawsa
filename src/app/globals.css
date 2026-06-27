@@ -2021,10 +2021,10 @@ h3 {
   width: min(1180px, calc(100% - 48px));
   display: grid;
   grid-template-columns: 1fr auto auto auto;
-  gap: 36px 56px;
+  gap: 24px 40px;
   align-items: start;
-  margin: 32px auto 24px;
-  padding: 40px 36px 36px;
+  margin: 24px auto 16px;
+  padding: 32px 32px 24px;
   border: 1px solid var(--line);
   border-radius: 28px;
   background: #24150f;
@@ -2138,7 +2138,7 @@ h3 {
 .copyright {
   grid-column: 1 / -1;
   margin: 0;
-  padding-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid rgba(255, 250, 240, 0.12);
   color: rgba(255, 250, 240, 0.56);
   font-size: 13px;

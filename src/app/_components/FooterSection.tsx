@@ -58,8 +58,7 @@ export function FooterSection() {
         </div>
       </address>
       <div className="copyright">
-        <p>© {new Date().getFullYear()} Stoneman Food and Beverages Pvt Ltd.</p>
-        <p>All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Stoneman Food and Beverages Pvt Ltd. All rights reserved.</p>
       </div>
     </footer>
   );
