@@ -73,13 +73,18 @@ export function Navbar({
     // is invisible.
     const settle = () => place(false);
     const brand = navSlot.closest(".brand-mark");
+    const topbar = navSlot.closest(".topbar");
     brand?.addEventListener("animationend", settle);
+    // The scroll-condense transition keeps moving the slot for ~320ms, so
+    // re-place when it finishes to keep the logo locked to its slot.
+    topbar?.addEventListener("transitionend", settle);
     const settleTimer = setTimeout(settle, 1000);
 
     const onResize = () => place(false);
     window.addEventListener("resize", onResize);
     return () => {
       brand?.removeEventListener("animationend", settle);
+      topbar?.removeEventListener("transitionend", settle);
       clearTimeout(settleTimer);
       window.removeEventListener("resize", onResize);
     };
