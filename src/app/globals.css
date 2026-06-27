@@ -781,7 +781,7 @@ textarea:focus-visible,
   font-weight: 900;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  text-align: center;
+  /* aligns with its (left) content block; mobile hero centers via parent */
 }
 
 h1,
@@ -2071,6 +2071,27 @@ h3 {
   display: none;
 }
 
+/* ─── Ultrawide (≥1500px) — fill the dead margins ────────────── */
+
+@media (min-width: 1500px) {
+  .hero-section {
+    width: min(1440px, calc(100% - 96px));
+    gap: 48px;
+  }
+
+  .section {
+    width: min(1320px, calc(100% - 96px));
+  }
+
+  .footer-section {
+    width: min(1320px, calc(100% - 96px));
+  }
+
+  .topbar {
+    padding: 10px clamp(24px, 5vw, 80px);
+  }
+}
+
 /* ─── Tablet (≤1040px) ───────────────────────────────────────── */
 
 @media (max-width: 1040px) {
@@ -2181,10 +2202,6 @@ h3 {
   .distributor-section {
     padding: 36px;
     gap: 18px;
-  }
-
-  .hero-stage {
-    min-height: 460px;
   }
 
   .flip-product {
