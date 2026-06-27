@@ -11,6 +11,7 @@ import { IngredientsSection } from "./_components/IngredientsSection";
 import { StorySection } from "./_components/StorySection";
 import { DistributorSection } from "./_components/DistributorSection";
 import { FooterSection } from "./_components/FooterSection";
+import { PageWipe } from "./_components/PageWipe";
 import type { Product } from "./_components/types";
 
 export default function Home() {
@@ -68,6 +69,9 @@ export default function Home() {
 
   return (
     <main className="site-shell">
+      {/* Page-load wipe animation */}
+      <PageWipe />
+
       {/* Skip to content link for accessibility */}
       <a href="#hero" className="skip-link">
         Skip to content
