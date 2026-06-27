@@ -85,14 +85,32 @@ export function DistributorSection() {
               <div className="form-field">
                 <textarea name="message" placeholder="Tell us about your channel or requirement" />
               </div>
-              <button className="primary-button" type="submit" disabled={loading}>
+              <button className="primary-button enquiry-submit-btn" type="submit" disabled={loading}>
                 {loading ? (
                   <>
                     <span className="spinner" aria-hidden="true" />
                     Sending...
                   </>
                 ) : (
-                  "Send Enquiry"
+                  <>
+                    <span>Send Enquiry</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="send-icon"
+                      aria-hidden="true"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </>
                 )}
               </button>
             </>

@@ -1816,6 +1816,20 @@ h3 {
   gap: 16px;
 }
 
+.enquiry-submit-btn {
+  align-self: center;
+  width: 100%;
+  max-width: 220px;
+}
+
+.send-icon {
+  transition: transform 150ms ease;
+}
+
+.enquiry-submit-btn:hover .send-icon {
+  transform: translate(3px, -3px);
+}
+
 .enquiry-form input,
 .enquiry-form textarea {
   width: 100%;
