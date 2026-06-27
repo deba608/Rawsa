@@ -2887,13 +2887,16 @@ h3 {
     background: #fff5ee;
   }
 
-  /* Legend wraps instead of cramming into one scrolling line */
   .compare-legend {
-    flex-wrap: wrap;
-    white-space: normal;
-    overflow-x: visible;
-    gap: 6px 10px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: auto;
+    gap: 6px 14px;
     padding: 12px 14px;
+    scrollbar-width: none;
+  }
+  .compare-legend::-webkit-scrollbar {
+    display: none;
   }
 }
 
