@@ -2257,7 +2257,7 @@ h3 {
   }
 
   .hero-section {
-    width: min(100% - 24px, 560px);
+    width: min(100% - 40px, 560px);
     min-height: auto;
     align-items: start;
     padding-top: 84px;
@@ -2265,7 +2265,7 @@ h3 {
   }
 
   .hero-section::before {
-    inset: 80px -12px 22px;
+    inset: 80px -10px 22px;
     border-radius: 26px;
   }
 
@@ -2422,7 +2422,7 @@ h3 {
   }
 
   .section {
-    width: calc(100% - 24px);
+    width: calc(100% - 40px);
     padding: 48px 0 52px;
   }
 
@@ -2612,15 +2612,15 @@ h3 {
   }
 
   .distributor-section {
-    width: calc(100% - 24px);
-    padding: 26px 20px;
+    width: calc(100% - 40px);
+    padding: 28px 22px;
     border-radius: 22px;
     gap: 20px;
   }
 
   .enquiry-form input,
   .enquiry-form textarea {
-    padding: 15px 16px;
+    padding: 17px 18px;
     border-radius: 13px;
   }
 
@@ -2629,10 +2629,10 @@ h3 {
   }
 
   .footer-section {
-    width: calc(100% - 24px);
+    width: calc(100% - 40px);
     grid-template-columns: 1fr 1fr;
-    gap: 14px 16px;
-    padding: 20px 18px 16px;
+    gap: 18px 18px;
+    padding: 28px 22px 22px;
     border-radius: 20px;
     margin: 20px auto 16px;
   }
