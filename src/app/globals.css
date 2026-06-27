@@ -659,6 +659,15 @@ textarea:focus-visible,
   gap: 10px;
 }
 
+/* Sign In is a nav-scaled CTA — slimmer than the page's 48px hero/form
+   buttons so its height matches the nav-link row rhythm (≈41px) and its
+   top aligns with the links. Still meets the 44px touch-target minimum. */
+.topbar .nav-right .primary-button {
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: 14px;
+}
+
 /* ─── Button base ────────────────────────────────────────────── */
 
 .nav-cta,
