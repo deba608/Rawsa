@@ -751,7 +751,7 @@ textarea:focus-visible,
   align-items: center;
   width: min(1240px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 128px 0 64px;
+  padding: 112px 0 48px;
 }
 
 .hero-section::before {
@@ -1054,9 +1054,9 @@ h3 {
 /* ─── Section base ───────────────────────────────────────────── */
 
 .section {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 72px 0;
 }
 
 .section-heading {
@@ -1588,7 +1588,7 @@ h3 {
 .ingredients-section {
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;
-  gap: 52px;
+  gap: 40px;
   align-items: center;
 }
 
@@ -1712,7 +1712,7 @@ h3 {
   gap: 26px;
   align-items: center;
   margin-bottom: 0;
-  padding: 48px 40px 24px;
+  padding: 40px 36px 32px;
   border-radius: 36px;
   background:
     radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.14), transparent 22rem),
@@ -1787,13 +1787,13 @@ h3 {
 /* ─── Footer ─────────────────────────────────────────────────── */
 
 .footer-section {
-  width: min(1180px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 48px));
   display: grid;
   grid-template-columns: 1fr auto auto auto;
   gap: 36px 56px;
   align-items: start;
-  margin: 40px auto 24px;
-  padding: 48px 40px 40px;
+  margin: 32px auto 24px;
+  padding: 40px 36px 36px;
   border: 1px solid var(--line);
   border-radius: 28px;
   background: #24150f;
@@ -2139,8 +2139,11 @@ h3 {
   }
 
   .footer-section {
+    width: calc(100% - 40px);
     grid-template-columns: 1fr 1fr 1fr;
     gap: 28px 32px;
+    padding: 32px 28px;
+    margin: 24px auto 20px;
   }
 
   .footer-brand {
@@ -2148,11 +2151,12 @@ h3 {
   }
 
   .section {
-    padding: 72px 0;
+    width: calc(100% - 48px);
+    padding: 60px 0;
   }
 
   .section-heading {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
   .hero-copy {
@@ -2161,6 +2165,20 @@ h3 {
 
   .hero-stage {
     min-height: 570px;
+  }
+
+  .hero-section {
+    width: calc(100% - 48px);
+    padding: 90px 0 40px;
+  }
+
+  .ingredients-section {
+    gap: 32px;
+  }
+
+  .distributor-section {
+    padding: 30px 28px;
+    gap: 18px;
   }
 
   .flavour-panel {
@@ -2197,11 +2215,6 @@ h3 {
   .why-grid,
   .ingredient-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .distributor-section {
-    padding: 36px;
-    gap: 18px;
   }
 
   .flip-product {
@@ -2247,8 +2260,8 @@ h3 {
     width: min(100% - 24px, 560px);
     min-height: auto;
     align-items: start;
-    padding-top: 96px;
-    padding-bottom: 24px;
+    padding-top: 84px;
+    padding-bottom: 20px;
   }
 
   .hero-section::before {
@@ -2410,11 +2423,11 @@ h3 {
 
   .section {
     width: calc(100% - 24px);
-    padding: 56px 0 64px;
+    padding: 48px 0 52px;
   }
 
   .section-heading {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   .flavour-panel {
@@ -2600,9 +2613,9 @@ h3 {
 
   .distributor-section {
     width: calc(100% - 24px);
-    padding: 30px 22px;
-    border-radius: 26px;
-    gap: 22px;
+    padding: 26px 20px;
+    border-radius: 22px;
+    gap: 20px;
   }
 
   .enquiry-form input,
@@ -2618,10 +2631,10 @@ h3 {
   .footer-section {
     width: calc(100% - 24px);
     grid-template-columns: 1fr 1fr;
-    gap: 12px 16px;
-    padding: 16px 14px 12px;
+    gap: 14px 16px;
+    padding: 20px 18px 16px;
     border-radius: 20px;
-    margin: 24px auto 20px;
+    margin: 20px auto 16px;
   }
 
   .footer-brand,
@@ -2847,7 +2860,7 @@ h3 {
   }
 
   .section {
-    padding: 24px 0 32px;
+    padding: 28px 0 36px;
   }
 
   .section-heading {
