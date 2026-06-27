@@ -9,19 +9,22 @@ export function PageWipe() {
   const [phase, setPhase] = useState<Phase>("done");
 
   useEffect(() => {
-    // Play only once per tab session, and never for reduced-motion users
-    const seen = sessionStorage.getItem("rawsa-intro");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (seen || reduce) {
+    // Play only once per tab session, and never for reduced-motion users.
+    // The flag is written only when the run finishes — so React Strict Mode's
+    // double-invoke (mount → cleanup → mount) doesn't skip the real run.
+    if (sessionStorage.getItem("rawsa-intro")) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       sessionStorage.setItem("rawsa-intro", "1");
       return;
     }
-    sessionStorage.setItem("rawsa-intro", "1");
 
     setPhase("fill");
     const t1 = setTimeout(() => setPhase("rise"), 60);   // juice rises to cover
     const t2 = setTimeout(() => setPhase("wash"), 1280);  // washes off the top
-    const t3 = setTimeout(() => setPhase("done"), 2480);  // unmount
+    const t3 = setTimeout(() => {
+      setPhase("done");                                   // unmount
+      sessionStorage.setItem("rawsa-intro", "1");         // mark done only now
+    }, 2480);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
