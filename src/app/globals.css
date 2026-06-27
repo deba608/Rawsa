@@ -2670,11 +2670,7 @@ h3 {
   }
 
   .ingredient-visual {
-    min-height: 380px;
-  }
-
-  .ingredient-visual img {
-    max-height: 280px;
+    display: none;
   }
 
   /* Mobile: marquee */
