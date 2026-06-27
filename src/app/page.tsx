@@ -100,7 +100,7 @@ export default function Home() {
       <WhySection />
       <CompareSection />
 
-      <IngredientsSection activeProduct={activeProduct} />
+      <IngredientsSection />
       <StorySection />
       <DistributorSection />
       <FooterSection />

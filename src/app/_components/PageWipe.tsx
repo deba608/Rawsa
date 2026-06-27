@@ -18,14 +18,15 @@ export function PageWipe() {
       return;
     }
 
-    setPhase("fill");
-    const t1 = setTimeout(() => setPhase("rise"), 60);   // juice rises to cover
-    const t2 = setTimeout(() => setPhase("wash"), 1280);  // washes off the top
+    const t0 = setTimeout(() => setPhase("fill"), 0);
+    const t1 = setTimeout(() => setPhase("rise"), 60);
+    const t2 = setTimeout(() => setPhase("wash"), 1280);
     const t3 = setTimeout(() => {
-      setPhase("done");                                   // unmount
-      sessionStorage.setItem("rawsa-intro", "1");         // mark done only now
+      setPhase("done");
+      sessionStorage.setItem("rawsa-intro", "1");
     }, 2480);
     return () => {
+      clearTimeout(t0);
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);

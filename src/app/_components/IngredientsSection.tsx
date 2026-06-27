@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import type { Product } from "./types";
 import { ingredientCards } from "./data";
 import { ScrollReveal } from "./ScrollReveal";
 
-export function IngredientsSection({ activeProduct }: { activeProduct: Product }) {
+export function IngredientsSection() {
   return (
     <section id="ingredients" className="section ingredients-section">
       <ScrollReveal variant="up" className="ingredient-content">
