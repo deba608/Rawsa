@@ -2688,7 +2688,9 @@ h3 {
     to { transform: translateX(calc(-50% - 9px)); }
   }
 
-  .distributor-section {
+  /* 2-class selector so the inner padding wins over the later, more
+     general `.section { padding: …0… }` rule (distributor is also .section) */
+  .distributor-section.section {
     width: calc(100% - 40px);
     padding: 28px 22px;
     border-radius: 22px;
