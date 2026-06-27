@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useLayoutEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import { navLinks } from "./data";
 
@@ -21,6 +21,15 @@ export function Navbar({
   const drawerSlotRef = useRef<HTMLSpanElement>(null);
   const flyRef = useRef<HTMLImageElement>(null);
   const flyReady = useRef(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Condense the bar once the page is scrolled past the hero top
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useIsoLayoutEffect(() => {
     const fly = flyRef.current;
@@ -56,10 +65,25 @@ export function Navbar({
     };
 
     place(true);
+
+    // The topbar/brand entrance animations use translateX/Y, which skew
+    // getBoundingClientRect while they run — so the first placement can land
+    // off. Re-place once the entrance settles (rects are transform-free then).
+    // The juice intro covers the bar during this window, so the correction
+    // is invisible.
+    const settle = () => place(false);
+    const brand = navSlot.closest(".brand-mark");
+    brand?.addEventListener("animationend", settle);
+    const settleTimer = setTimeout(settle, 1000);
+
     const onResize = () => place(false);
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [mobileMenuOpen]);
+    return () => {
+      brand?.removeEventListener("animationend", settle);
+      clearTimeout(settleTimer);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [mobileMenuOpen, scrolled]);
 
   return (
     <>
@@ -148,7 +172,7 @@ export function Navbar({
         </a>
       </nav>
 
-      <nav className="topbar" aria-label="Primary navigation">
+      <nav className={`topbar${scrolled ? " is-scrolled" : ""}`} aria-label="Primary navigation">
         <a className="brand-mark" href="#hero" aria-label="Rawsa home">
           <span className="logo-slot nav-slot" ref={navSlotRef}>
             <Image

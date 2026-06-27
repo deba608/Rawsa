@@ -524,9 +524,7 @@ textarea:focus-visible,
 
 .drawer-links a:hover,
 .drawer-links a.is-active {
-  background: rgba(255, 255, 255, 0.55);
   color: var(--orange);
-  border-color: rgba(249, 115, 22, 0.3);
 }
 
 .drawer-links a:last-child {
@@ -566,6 +564,22 @@ textarea:focus-visible,
   box-shadow: 0 6px 24px rgba(96, 48, 16, 0.08);
   backdrop-filter: blur(18px);
   animation: topbar-slide-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    min-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 320ms ease,
+    box-shadow 320ms ease,
+    border-color 320ms ease;
+}
+
+/* Condense + lift the bar once the user scrolls past the hero top */
+.topbar.is-scrolled {
+  min-height: 60px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: rgba(255, 253, 248, 0.95);
+  border-bottom-color: rgba(249, 115, 22, 0.18);
+  box-shadow: 0 10px 30px rgba(96, 48, 16, 0.14);
 }
 
 @keyframes topbar-slide-down {
@@ -584,6 +598,7 @@ textarea:focus-visible,
   align-items: center;
   gap: 12px;
   min-width: 0;
+  margin-top: 4px;
   animation: brand-fade-in 0.5s ease 0.3s both;
 }
 
@@ -675,28 +690,32 @@ textarea:focus-visible,
 .nav-links a:nth-child(2) { animation-delay: 0.42s; }
 .nav-links a:nth-child(3) { animation-delay: 0.49s; }
 .nav-links a:nth-child(4) { animation-delay: 0.56s; }
+.nav-links a:nth-child(5) { animation-delay: 0.63s; }
 
 @keyframes nav-link-in {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Sliding underline — GPU transform (scaleX), gradient, grows from centre */
 .nav-links a::after {
   content: "";
   position: absolute;
-  bottom: 4px;
-  left: 50%;
-  width: 0;
+  left: 14px;
+  right: 14px;
+  bottom: 5px;
   height: 2px;
   border-radius: 999px;
-  background: var(--orange);
-  transition: width 250ms var(--ease-spring), left 250ms var(--ease-spring);
+  background: linear-gradient(90deg, var(--orange), var(--guava));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 280ms var(--ease-spring);
+  will-change: transform;
 }
 
 .nav-links a:hover::after,
 .nav-links a.is-active::after {
-  width: 20px;
-  left: calc(50% - 10px);
+  transform: scaleX(1);
 }
 
 /* Mid-desktop (1041–1200): drop the brand tagline and tighten the link
@@ -713,7 +732,6 @@ textarea:focus-visible,
 
 .nav-links a:hover,
 .nav-links a.is-active {
-  background: rgba(249, 115, 22, 0.08);
   color: var(--orange);
 }
 
@@ -736,6 +754,24 @@ textarea:focus-visible,
   min-height: 44px;
   padding: 0 22px;
   font-size: 14px;
+}
+
+/* Light sheen that sweeps across the Sign In pill on hover */
+.topbar .nav-right .primary-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-18deg);
+  transition: left 620ms ease;
+  pointer-events: none;
+}
+
+.topbar .nav-right .primary-button:hover::before {
+  left: 150%;
 }
 
 /* ─── Button base ────────────────────────────────────────────── */
@@ -1675,14 +1711,19 @@ h3 {
 .rawsa-badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #f97316, #dc2626);
+  background: rgba(249, 115, 22, 0.85);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 2px 2px 6px var(--shadow-dark), -2px -2px 6px var(--shadow-light), inset 0 2px 4px rgba(255, 255, 255, 0.3);
   color: #fff;
   font-size: 11px;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* Compare cell icons */
