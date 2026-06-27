@@ -2467,9 +2467,7 @@ h3 {
     padding: 0 10px;
     overflow: hidden;
     border-radius: 22px;
-    background:
-      radial-gradient(circle at 50% 10%, rgba(245, 158, 11, 0.18), transparent 14rem),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 246, 229, 0.56));
+    background: none;
   }
 
   .mobile-product-strip img {
@@ -2478,7 +2476,7 @@ h3 {
     height: 184px;
     margin: 0;
     object-fit: contain;
-    filter: drop-shadow(0 12px 14px rgba(83, 42, 13, 0.18));
+    filter: none;
   }
 
   /* Carousel is redundant on mobile — the 5-bottle hero strip and the
