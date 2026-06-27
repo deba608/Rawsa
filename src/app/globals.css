@@ -1827,7 +1827,7 @@ h3 {
 }
 
 .enquiry-submit-btn:hover .send-icon {
-  transform: translate(3px, -3px);
+  transform: translateX(3px);
 }
 
 .enquiry-form input,

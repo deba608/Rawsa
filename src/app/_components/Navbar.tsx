@@ -112,7 +112,7 @@ export function Navbar({
           </button>
         </div>
         <div className="drawer-links">
-          {navLinks.map(({ href, label, id }) => (
+          {navLinks.filter(l => l.id !== "login").map(({ href, label, id }) => (
             <a
               key={id}
               href={href}
@@ -122,9 +122,16 @@ export function Navbar({
               {label}
             </a>
           ))}
+          <a
+            href="#distributor"
+            className={activeNav === "distributor" ? "is-active" : ""}
+            onClick={onNavClick}
+          >
+            Distributor Enquiry
+          </a>
         </div>
-        <a className="primary-button drawer-cta" href="#distributor" onClick={onNavClick}>
-          Distributor Enquiry
+        <a className="primary-button drawer-cta" href="#login" onClick={onNavClick}>
+          Sign In
         </a>
       </nav>
 
