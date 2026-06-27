@@ -21,6 +21,7 @@ export function Navbar({
   const drawerSlotRef = useRef<HTMLSpanElement>(null);
   const flyRef = useRef<HTMLImageElement>(null);
   const flyReady = useRef(false);
+  const prevMenu = useRef(false);
   const [scrolled, setScrolled] = useState(false);
 
   // Condense the bar once the page is scrolled past the hero top
@@ -64,7 +65,12 @@ export function Navbar({
       flyReady.current = true;
     };
 
-    place(true);
+    // FLIP-animate only for the navbar↔drawer logo travel (menu toggle).
+    // Scroll-condense just nudges the slot a few px — snap so it tracks the
+    // bar cleanly without a 560ms spring fighting the 320ms condense.
+    const isMenuChange = prevMenu.current !== mobileMenuOpen;
+    prevMenu.current = mobileMenuOpen;
+    place(isMenuChange);
 
     // The topbar/brand entrance animations use translateX/Y, which skew
     // getBoundingClientRect while they run — so the first placement can land
