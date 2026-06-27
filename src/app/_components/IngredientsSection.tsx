@@ -8,15 +8,7 @@ import { ScrollReveal } from "./ScrollReveal";
 export function IngredientsSection({ activeProduct }: { activeProduct: Product }) {
   return (
     <section id="ingredients" className="section ingredients-section">
-      <ScrollReveal variant="left" className="ingredient-visual">
-        <Image
-          src={activeProduct.back}
-          alt={`Rawsa ${activeProduct.name} ingredient and nutrition panel`}
-          width={390}
-          height={1098}
-        />
-      </ScrollReveal>
-      <ScrollReveal variant="right" className="ingredient-content">
+      <ScrollReveal variant="up" className="ingredient-content">
         <p className="eyebrow">Ingredient story</p>
         <h2>Fruit first, then a thoughtful herbal signature.</h2>
         <p>

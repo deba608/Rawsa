@@ -664,10 +664,39 @@ textarea:focus-visible,
 
 .nav-links a {
   display: block;
+  position: relative;
   padding: 10px 16px;
   border-radius: 12px;
-  white-space: nowrap; /* never break a label onto two lines */
+  white-space: nowrap;
   transition: background 160ms ease, color 160ms ease;
+  animation: nav-link-in 0.4s ease both;
+}
+.nav-links a:nth-child(1) { animation-delay: 0.35s; }
+.nav-links a:nth-child(2) { animation-delay: 0.42s; }
+.nav-links a:nth-child(3) { animation-delay: 0.49s; }
+.nav-links a:nth-child(4) { animation-delay: 0.56s; }
+
+@keyframes nav-link-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--orange);
+  transition: width 250ms var(--ease-spring), left 250ms var(--ease-spring);
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
+  width: 20px;
+  left: calc(50% - 10px);
 }
 
 /* Mid-desktop (1041–1200): drop the brand tagline and tighten the link
@@ -692,6 +721,12 @@ textarea:focus-visible,
   display: flex;
   align-items: center;
   gap: 10px;
+  animation: nav-right-in 0.5s ease 0.5s both;
+}
+
+@keyframes nav-right-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 /* Sign In is a nav-scaled CTA — slimmer than the page's 48px hero/form
@@ -762,12 +797,13 @@ textarea:focus-visible,
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition: transform 220ms var(--ease-spring), box-shadow 220ms ease, background 200ms ease, filter 200ms ease;
 }
 
 .nav-cta:hover {
   background: rgba(58, 34, 24, 0.85);
   transform: translateY(-2px);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 0 20px rgba(249, 115, 22, 0.15);
 }
 
 .nav-cta:active {
@@ -816,6 +852,7 @@ textarea:focus-visible,
   color: #f97316;
   background: rgba(255, 255, 255, 0.55);
   transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 16px rgba(249, 115, 22, 0.1);
 }
 
 .nav-signin:active {
@@ -835,11 +872,33 @@ textarea:focus-visible,
   border: 0;
   background: transparent;
   padding: 0;
-  transition: opacity 180ms ease;
+  position: relative;
+  transition: transform 220ms var(--ease-spring);
+}
+
+.hamburger::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--orange);
+  transition: width 250ms var(--ease-spring), left 250ms var(--ease-spring);
+}
+
+.hamburger:hover::after {
+  width: 24px;
+  left: calc(50% - 12px);
 }
 
 .hamburger:hover {
-  opacity: 0.6;
+  transform: scale(1.08);
+}
+
+.hamburger:active {
+  transform: scale(0.95);
 }
 
 .ham-line {
@@ -848,8 +907,12 @@ textarea:focus-visible,
   height: 2px;
   border-radius: 2px;
   background: var(--ink);
-  transition: transform 260ms ease, opacity 180ms ease;
+  transition: transform 300ms var(--ease-spring), opacity 200ms ease, background 200ms ease;
   transform-origin: center;
+}
+
+.hamburger:hover .ham-line {
+  background: var(--orange);
 }
 
 .top-open {
@@ -1711,40 +1774,29 @@ h3 {
 }
 
 .ingredients-section {
-  display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.ingredient-visual {
-  min-height: 620px;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  border-radius: 34px;
-  background:
-    radial-gradient(circle at 50% 28%, rgba(245, 158, 11, 0.2), transparent 20rem),
-    linear-gradient(180deg, #ffffff, #fff3d4);
-  box-shadow: var(--shadow);
-}
-
-.ingredient-visual img {
-  width: auto;
-  max-height: 600px;
-  object-fit: contain;
-  filter: drop-shadow(0 32px 30px rgba(83, 42, 13, 0.22));
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
 }
 
 .ingredient-content {
+  max-width: 900px;
+  width: 100%;
+}
+
+.ingredient-content p {
+  margin: 0 auto;
   max-width: 680px;
 }
 
 .ingredient-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 28px;
+  gap: 24px;
+  margin-top: 48px;
+  text-align: left;
 }
 
 .ingredient-cards article {
