@@ -2261,7 +2261,7 @@ h3 {
 
   .section {
     width: calc(100% - 48px);
-    padding: 60px 16px;
+    padding: 36px 16px;
   }
 
   .section-heading {
@@ -2361,7 +2361,10 @@ h3 {
   }
 
   .nav-cta,
-  .nav-signin {
+  .nav-signin,
+  /* On phones the hamburger drawer already carries Sign In — hide the
+     topbar pill so it doesn't crowd the logo or duplicate the action. */
+  .topbar .nav-right .primary-button {
     display: none !important;
   }
 
